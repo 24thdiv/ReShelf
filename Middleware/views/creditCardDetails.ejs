@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Amazon-Fresh</title>
+    <% include lib.ejs %>
+
+
+                  <script>
+                angular.module('cardModule', []).controller('cardController', function($scope, $http, $location) {
+                  
+                  $scope.updateCardDetails = function(){
+                    console.log($scope.zipCode);
+                    var data = {
+                        card_number: $scope.card_number,
+                        name_on_card: $scope.name_on_card,
+                        exp_month: $scope.exp_month,
+                        exp_year: $scope.exp_year,
+                        cvv: $scope.cvv
+                      };
+
+                    $http({
+                      method: "POST",
+                      url: '/user/card/update',
+                      data: data
+                    }).success(function(res){
+                      if(res){
+                        console.log(res.data);
+                        window.location.assign('/customerAccount');
+                      }
+                    });
+                  }
+
+
+                  $scope.getAddress = function(){
+          $http({
+            method: "GET",
+            url: '/user/address'
+          }).success(function(res){
+            if(res.status == 200){
+              console.log(res.data);
+              $scope.user = res.data;
+              $scope.state = res.data[0].state;
+              $scope.address = res.data[0].address;
+              $scope.city = res.data[0].city;
+              $scope.zipcode = res.data[0].zipcode;
+              $scope.card_number = res.data[0].card_number;
+              $scope.name_on_card = res.data[0].name_on_card;
+              
+              $scope.exp_month = res.data[0].exp_month;
+              $scope.exp_month = res.data[0].exp_month;
+               $scope.exp_year = res.data[0].exp_year;
+
+            }
+          });
+        }
+
+              });
+              </script>
+
+
+
+  </head>
+  <body ng-app="cardModule" ng-controller="cardController" ng-init="getAddress();">
+    <% include menu1.ejs %>
+    <div style="height: 50px; display: block;"></div>
+        <div class="container-fluid">
+
+
+                <h3>Credit Card Details</h3>
+                <form name="myCredit">
+                <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6">
+                    <div >
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group has-feedback">
+                            <label class="credit-card-labels-account">Card Number</label>
+                              <input type="text" class="form-control" placeholder="Card Number" ng-model="card_number" name="card_number" ng-minlength="16" ng-maxlength="16" autocomplete="off"  required>
+
+                              <div role="alert">
+                                <span class="error" ng-show="myCredit.card_number.$error.minlength" style="color:maroon;">
+                                  Invalid Card Number</span>
+                                <span class="error" ng-show="myCredit.card_number.$error.maxlength" style="color:red;">
+                                  Invalid Card Number</span>
+                              <span class="error" ng-show="myCredit.card_number.$error.required" style="color:red;"> Card Number is Required!</span>
+                             </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="credit-card-labels-account">Name on the Card</label>
+                              <input type="text" class="form-control" placeholder="Name on the Card" ng-model="name_on_card" name="name_on_card" required>
+                              <span class="error" ng-show="myCredit.name_on_card.$error.required" style="color:red;">Name on Card is Required!</span>
+
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="form-group">
+
+                            <div class="col-md-2">
+                              <label class="credit-card-labels-account">Expiry Date</label>
+                              <select class="form-control" ng-model="exp_month" name="exp_month" required >
+                              <span class="error" ng-show="myCredit.exp_month.$error.required">Required!</span>
+                               
+                                <option>01</option>
+                                <option selected="">02</option>
+                                <option>03</option>
+                                <option>04</option>
+                                <option>05</option>
+                                <option>06</option>
+                                <option>07</option>
+                                <option>08</option>
+                                <option>09</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                              </select>
+                              
+                            </div>
+
+                            <div class="col-md-2">
+                              <label class="credit-card-labels-account">&nbsp;</label>
+
+                              <select class="form-control" name="exp_year" ng-model="exp_year" id="1" required>
+                              <span class="error" ng-show="myCredit.exp_year.$error.required">Required!</span>
+                               
+                                <option value="2016" selected="selected">2016</option>
+                                <option>2017</option>
+                                <option>2018</option>
+                                <option>2019</option>
+                                <option>2020</option>
+
+
+                              </select>
+                              
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                              <label class="credit-card-labels-account">CVV</label>
+                                <input type="password" ng-pattern="/^\d+$/" class="form-control" placeholder="CVV" name="cvv" ng-model="cvv"  ng-minlength="3" ng-maxlength="4" required>
+                                <div role="alert">
+                                <span class="error" ng-show="myCredit.cvv.$error.minlength">
+                                  Invalid Cvv</span>
+                                <span class="error" ng-show="myCredit.cvv.$error.maxlength">
+                                  Invalid Cvv</span><br>
+                                  <span ng-show="myCredit.cvv.$error.pattern" style="color:red;">Must be number</span>
+                              
+                                <span class="error" ng-show="myCredit.cvv.$error.required" style="color:red;">Required!</span>
+                                </div>
+                            </div>
+
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3"></div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8">
+                      <button type="button" class="btn btn-primary btn-block btn-signup" ng-click="updateCardDetails();" ng-disabled="myCredit.$invalid">Update credit Card Details</button>
+
+                  </div>
+                  <div class="col-md-2"></div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    </form>
+  </div>
+ 
+
+    <% include footer.ejs %>
+    <% include js-lib.ejs %>
+  </body>
+</html>

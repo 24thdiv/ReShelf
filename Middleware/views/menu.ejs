@@ -1,0 +1,58 @@
+<div class="alert-top-notify suc col-lg-12"></div>
+<div class="container-fluid" id="menu-wrapper">
+	<div class="row">
+		<div class="col-xs-8">
+			<ul id="ul-menu">
+				<li>
+					<a href="/"><img src="/img/Amazon-logo.png" class="pull-left"></a>
+				</li>
+				<% if(typeof user == 'object') {%>
+				<li>
+					<div class="dropdown">
+
+						<a href="#" class="dropdown-toggle capitalize" data-toggle="dropdown">Hi, <%= user.fname  %> <%= user.lname %> <span class="caret"></span></a>
+
+						<ul class="dropdown-menu dropdown-username">
+							<li>
+								<a href="/customerAccount">Your Account</a>
+							</li>
+							<li>
+								<a href="#">Manage Your Dash</a>
+							</li>
+							<li>
+								<a href="/help">Help</a>
+							</li>
+							<li>
+								<a href="/logout">Sign Out</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<div class="separator">|</div>
+					<a href="#">Your Deliveries</a>
+				</li>
+				<li>
+					<div class="separator">|</div>
+					<a href="#">Messages</a>
+				</li>
+				<li>
+					<div class="separator">|</div>
+					<a href="#">Your Lists</a>
+				</li>
+				<li>
+					<div class="separator">|</div>
+					<a href="#">Past Purchases</a>
+				</li>
+				<% }else{ %>
+				<li>
+					<span>
+						Already an AmazonFresh customer?
+						<a href="/login" style="text-decoration: underline;">Sign in</a>
+					</span>
+				</li>
+				<% } %>
+			</ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Amazon-Fresh</title>
+    <% include lib.ejs %>
+  </head>
+  <body ng-app="amazon" ng-controller="amazon">
+    <% include menu.ejs %>
+    <div style="height: 50px; display: block;"></div>
+    
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-9" style="padding-left: 38px">
+          <% include search.ejs %>
+        </div><br>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-9">
+          <div class="cat-list">
+            <div class="row">
+              <div class="col-lg-2">
+                    <div style="margin-top: 20px; font-size: 20px;">Show Results by</div>
+                    <div style="font-size: 14px; margin-top: 15px; border-bottom: 1px #aaa dashed">All Amazon Fresh Items</div>
+                    <h5><a href="/search?id=1">Fresh Fruits</a></h5>
+                    <h5><a href="/search?id=2">Fresh Vegetables</a></h5>
+                    <h5><a href="/search?id=3">Nuts</a></h5>
+                    <h5><a href="/search?id=4">Herbs</a></h5>
+                    <h5><a href="/search?id=5">Dairy</a></h5>
+                    <h5><a href="/search?id=6">Dried Fruit</a></h5>
+                    <h5><a href="/search?id=7">Eggs</a></h5>
+                    <h5><a href="/search?id=8">Fresh Cut Flowers</a></h5>
+                    <h5><a href="/search?id=101">Seeds</a></h5>
+
+                    <!-- <h4>Refine By</h4><br>
+                    <h6>Brands</h6><br>
+                    <input class="form-control" id="inputdefault" type="text">
+                    <div class="btn-group" >
+                  
+
+                  <ul class="scrollable-menu" role="menu">
+                      <li><a href="#">Brand</a></li>
+                      <li><a href="#">Brand1</a></li>
+                      <li><a href="#">Brand2</a></li>
+                      <li><a href="#">Brand3</a></li>
+                      <li><a href="#">Brand4</a></li>
+                      <li><a href="#">Brand5</a></li>
+                      
+                  </ul><br><br>
+
+                              <h5>Speciality</h5>   
+              <div class="checkbox" style="font-size: 17px;">
+        <label><input type="checkbox" style="font-size: 17px;" value="">Organic </label>
+        </div>
+
+              </div> -->
+
+              </div>
+              <div class="col-lg-10">
+                <% include product.ejs %>
+              </div> 
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <% include cart.ejs %>
+        </div>
+      </div>
+    </div>    
+  </div>   
+
+<!-- 
+        Vansh Shah -->
+
+        
+    <% include footer.ejs %>
+    
+    <% include js-lib.ejs %>
+
+  </body>
+
+</html>
