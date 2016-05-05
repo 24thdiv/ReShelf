@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
-var connection = mongoose.createConnection("mongodb://localhost/amazon");
+var connection = mongoose.createConnection("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
 autoIncrement.initialize(connection);
 
 var contactsSchema = mongoose.Schema({
