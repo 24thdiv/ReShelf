@@ -201,7 +201,7 @@ html {
 	text-transform: uppercase;
 }
 #menu-wrapper{
-	background-color: #FFFFF0;
+	background-color: #3B3E44;
 	height: 45px;
 	position: fixed;
 	width: 100%;
@@ -405,7 +405,7 @@ html {
 
 /*FOOTER*/
 #footer-wrapper{
-	background-color: #FFFFF0;
+	background-color: #3B3E44;
 	height: 160px;
 	width: 100%;
 	margin-top: 50px;
