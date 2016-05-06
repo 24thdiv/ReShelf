@@ -8,34 +8,53 @@
 					
 				</li>
 				<% if(typeof user == 'object') {%>
+
+
+				<li>
+					
+					<a href="/" style="align-content: left; color:black; font-weight: bold; font-size: 20px;" >Home</a>
+				</li>
+				<li>
+					<div class="separator"></div>
+					
+				</li>
+
+
 				<li>
 					<div class="dropdown">
 
-						<a href="#" class="dropdown-toggle capitalize" data-toggle="dropdown">Hi, <%= user.fname  %> <%= user.lname %> <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle capitalize" data-toggle="dropdown" style="color:black;">Hi, <%= user.fname  %> <%= user.lname %> <span class="caret"></span></a>
 
-						<ul class="dropdown-menu dropdown-username">
+						<ul class="dropdown-menu" style="color:white;">
 							<li>
-								<a href="/customerAccount">Your Account</a>
+								<a href="/customerAccount" style="color:black;">Your Account</a>
 							</li>
 							
 							<li>
-								<a href="/logout">Sign Out</a>
+								<a href="/logout" style="color:black;" >Sign Out</a>
 							</li>
 						</ul>
 					</div>
 				</li>
 				<li>
-					<div class="separator">|</div>
-					<a href="#">Your Orders</a>
+					<div class="separator"></div>
+					<a href="#" style="color:black;">Your Orders</a>
 				</li>
 				
 				<% }else{ %>
+				<ul id="ul-menu">
+
+				<li>
+					
+					<a href="/" style="align-content: left; color:black; font-weight: bold; font-size: 20px;" >Home</a>
+				</li>
 				<li>
 					<span style="color: black; text-align: right;">
+					<div class="separator"></div>
 						
-						<a href="/login" style=" font-weight: bold; text-decoration: underline; color: black; text-align: right;" >Sign in</a> to Buy
-					</span>
+						<a href="/login" style=" font-weight: bold; text-decoration: underline; color: black; text-align: right;" >Sign in</a>            	</span>
 				</li>
+				</ul>
 				<% } %>
 			</ul>
 		</div>

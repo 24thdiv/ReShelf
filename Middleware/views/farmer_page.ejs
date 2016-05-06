@@ -18,14 +18,14 @@ $(window).load(function(){
       <div class="row">
       <div class="col-lg-5">
       <br><br>
-      <h5> Farmer Name: <span style="font-weight: bold; color:green;"><%= farmer.object[0].fname %> <%= farmer.object[0].lname %></span></h5>
-      <h5> Email: <span style="font-weight: bold; color:green;"><%= farmer.object[0].email %></span> </h5>
-      <h5> Introduction: <span style="font-weight: bold; color:green;"> <%= farmer.object[0].intro %></span> </h5>    
+      <h5> Store:  <span style="font-weight: bold; color:green;"><%= farmer.object[0].fname %> <%= farmer.object[0].lname %></span></h5>
+      <h5> Store Email id:  <span style="font-weight: bold; color:green;"><%= farmer.object[0].email %></span> </h5>
+      <h5> Store Details: <span style="font-weight: bold; color:green;"> <%= farmer.object[0].intro %></span> </h5>    
     </div>
-      <div class="col-lg-7">
-    <iframe width="550" height="350" src="https://www.youtube.com/embed/QuzhwkaNC40"><!-- src="<%= farmer.object[0].video %>" -->
+<!--       <div class="col-lg-7">
+    <iframe width="550" height="350" src="https://www.youtube.com/embed/QuzhwkaNC40">
 </iframe></div>
-      
+ -->      
 </div>
       <h3 style="color: green;">Products by <%= farmer.object[0].fname %></h3>
       <% for(var i=0; i < products.length; i++) { %>
@@ -61,9 +61,9 @@ $(window).load(function(){
                 </select>
               </div>
               <% if(typeof user == 'object') {%>
-                <button class="add-to-cart" ng-click="addItem(<%= products[i].p_id %>)">Add to Cart</button>
+                <button class="add-to-cart" ng-click="addItem(<%= products[i].p_id %>)">Add</button>
               <% }else{ %>
-                <button class="add-to-cart" style="background: #aaa; cursor: not-allowed; color: #fff">Add to Cart</button>
+                <button class="add-to-cart" style="background: #aaa; cursor: not-allowed; color: #fff">Add</button>
               <% } %>
             </div>
           </div>

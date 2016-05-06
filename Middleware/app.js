@@ -225,6 +225,17 @@ app.get('/myOrders', function(req, res){
   }
 });
 
+
+app.get('/waste-stats', function(req, res){
+
+  if(typeof req.session.user != 'undefined'){
+    console.log(req.session.user);
+    res.render('chart', { user: req.session.user });
+  }else{
+    res.render('chart');
+  }
+});
+
 // app.get('/orderDetails', function(req, res){
 
 //   if(typeof req.session.user != 'undefined'){

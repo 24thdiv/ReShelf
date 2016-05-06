@@ -4,7 +4,7 @@
 			<div class="cart-head">
 				<span class="capitalize">
 					<% if(typeof user != 'undefined') {%>
-						Deliver to 
+						Ordering as :  
 						<b> <%= user.fname %> <%= user.lname %>
 						<% if(user.city){ %>
 							 - <%= user.city %>
@@ -12,30 +12,30 @@
 						</b>
 					<% } %>
 				</span><br>
-				<span>
+				<!-- <span>
 					<a href="/addressDetails" style="text-decoration: underline;">(change delivery address)</a>
-				</span>
+				</span> -->
 			</div>
 			<div class="cart-proceed">
-				<div ng-if="cartTotal < 50">
+				<div ng-if="cartTotal < 10">
 					<a href="#">
-						<div class="checkout-btn" style="background: #aaa; cursor: no-drop">Proceed to Checkout</div>
+						<div class="checkout-btn" style="background: #aaa; cursor: no-drop">Place your Order</div>
 					</a>
 				</div>
 				
-				<div ng-if="cartTotal >= 50">
+				<div ng-if="cartTotal >= 10">
 					<a href="/PreviewOrder">
-						<div class="checkout-btn aaa">Proceed to Checkout</div>
+						<div class="btn btn-info btn-block" style="size">Place Your Order</div>
 					</a>
 				</div>
 			</div>
 			<div class="cart-total">
 				<div class="pull-left">
-					<span style="color: #669900;">
-						Subtotal ${{ cartTotal }}
+					<span style="color: #000000;">
+						Subtotal <i style="font-weight: bold;">${{ cartTotal }}</i>
 					</span>
 				</div>
-				<div class="pull-right">
+				<div class="pull-right" style="font-weight: bold;">
 					<span>
 						({{ cartQty }} Items)
 					</span>
@@ -75,21 +75,21 @@
 				</ul>
 			</div>
 		<% }else{ %>
-			<div class="cart-head">
+			<div class="cart-head" style="align: pull-right">
 				<br>
 				<div>
-					AmazonFresh is available exclusively to Prime Fresh members.
+					Take the advantage and Buy now!
 				</div>
 				<br>
 				<div>
 					<a href="/login">
-						<div class="checkout-btn" style="background: #690">Sign in with Amazon account</div>
+						<div class="btn btn-success">Sign in</div>
 					</a>
 				</div>
 				<br>
-				<div>
+				<!-- <div>
 					Not a Prime Fresh member? <a href="/signup" style="text-decoration: underline; color: #00f"> Start your 30-day FREE trial today</a>.
-				</div>
+				</div> -->
 				<br>
 			</div>
 		<% }%>
