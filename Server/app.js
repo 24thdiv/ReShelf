@@ -42,8 +42,8 @@ if ('development' == app.get('env')) {
 app.get('/users', user.list);
 
 
-//var mongoConnectURL = "mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf";
-var mongoConnectURL = "mongodb://localhost:27017/reshelf";
+var mongoConnectURL = "mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf";
+//var mongoConnectURL = "mongodb://localhost:27017/reshelf";
 var cnn = amqp.createConnection({host:'127.0.0.1'});
 
 // connect to the mongo collection session and then createServer

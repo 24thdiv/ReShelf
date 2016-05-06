@@ -24,8 +24,8 @@ require('./routes/passport')(passport);
 
 
 var mongoose = require('mongoose');
-//mongoose.connect("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
-mongoose.connect("mongodb://localhost:27017/reshelf");
+mongoose.connect("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
+//mongoose.connect("mongodb://localhost:27017/reshelf");
 
 var mongoURL = "mongodb://localhost:27017/reshelf";
 var expressSession = require("express-session");
