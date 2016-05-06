@@ -19,8 +19,7 @@ exports.profile = function(req, res) {
     res.render('admin-profile', {
       email : req.session.email, 
       fname : req.session.fname, 
-      lname : req.session.lname, 
-      createdAt : req.session.createdAt
+      lname : req.session.lname
     });
   }
   else
@@ -120,23 +119,23 @@ exports.checkLogin = function(req, res) {
 		mq.make_request('admin-queue', msg_payload,function(err, results) {
 			if(err) {
 				console.log("Error occurred while requesting to server for checkLogin : " + err);
-				var json_resposes = {"statusCode" : 401, "error" : "Could not connect to server"};
+				var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
 				res.send(json_resposes);
 			} else {
 				var dataParsed = JSON.parse(results);
-				if(dataParsed.statusCode == 200) {
+				if(dataParsed.status == 200) {
 					req.session.email = email;
 					req.session.fname = dataParsed.fname;
 					req.session.lname = dataParsed.lname;
-					req.session.createdAt = dataParsed.createdAt;
+					
 					res.send(JSON.parse(results));
-				} else if(dataParsed.statusCode == 401) {
+				} else if(dataParsed.status == 401) {
 					res.send(JSON.parse(results));
 				}
 			}
 		});
 	} else {
-		var json_resposes = {"statusCode" : 401, "error" : "Invalid Login Credentials!"};
+		var json_resposes = {"status" : 401, "error" : "Invalid Login Credentials!"};
 		res.send(json_resposes);
 	}
 }
@@ -149,8 +148,7 @@ exports.home = function(req, res){
     res.render('admin-index', {
   	 email : req.session.email, 
   	 fname : req.session.fname, 
-  	 lname : req.session.lname, 
-  	 createdAt : req.session.createdAt
+  	 lname : req.session.lname 
     });
   }
   else {
@@ -164,8 +162,7 @@ exports.farmersList = function(req, res){
   	res.render('farmers-list', {
   		email : req.session.email, 
   		fname : req.session.fname, 
-  		lname : req.session.lname, 
-  		createdAt : req.session.createdAt
+  		lname : req.session.lname
   	});
   }
   else
@@ -180,8 +177,7 @@ exports.productsList = function(req,res){
 		res.render('products-list', {
   		email : req.session.email, 
   		fname : req.session.fname, 
-  		lname : req.session.lname, 
-  		createdAt : req.session.createdAt
+  		lname : req.session.lname
   	});
   }
 	else{
@@ -195,8 +191,7 @@ exports.trucksList = function(req,res){
     res.render('trucks-list', {
   		email : req.session.email, 
   		fname : req.session.fname, 
-  		lname : req.session.lname, 
-  		createdAt : req.session.createdAt
+  		lname : req.session.lname
   	});
   }
   else{
@@ -210,8 +205,7 @@ exports.driversList = function(req,res){
     res.render('drivers-list', {
   		email : req.session.email, 
   		fname : req.session.fname, 
-  		lname : req.session.lname, 
-  		createdAt : req.session.createdAt
+  		lname : req.session.lname
   	});
   } else
     res.redirect('/admin/login');
@@ -223,8 +217,7 @@ exports.customersList = function(req,res){
     res.render('customers-list', {
       email : req.session.email, 
   		fname : req.session.fname, 
-  		lname : req.session.lname, 
-  		createdAt : req.session.createdAt
+  		lname : req.session.lname
       });
   } else{
     res.redirect('/admin/login');
@@ -237,8 +230,7 @@ exports.ordersList = function(req,res){
     res.render('orders-list', {
   		email : req.session.email, 
   		fname : req.session.fname, 
-  		lname : req.session.lname, 
-  		createdAt : req.session.createdAt
+  		lname : req.session.lname
   	});
   } else{
     res.redirect('/admin/login');

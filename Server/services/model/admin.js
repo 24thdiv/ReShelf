@@ -1,20 +1,21 @@
 var mongoose = require('mongoose');
 
 var autoIncrement = require('mongoose-auto-increment');
-var connection = mongoose.createConnection("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
+//var connection = mongoose.createConnection("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
+var connection = mongoose.createConnection("mongodb://localhost:27017/reshelf");
 autoIncrement.initialize(connection);
 
 var adminSchema = mongoose.Schema({
 	a_id: {type: Number, required: true, index: true},
 	fname: {type: String, required: true},
-	lname: {type: String, required: true},
-	email: {type: String, required: true},
+	lname: {type: String, required: false},
+	email: {type: String, required: true, unique : true},
 	pass: {type: String, required: true},
-	address: {type: String},
-	zipcode: Number,
-	city: String,
-	state: String,
-	contacts: [Number]
+	address: {type: String, required : false},
+	zipCode: {type : Number, required : false},
+	city: {type : String, required : false},
+	state: {type : String, required : false},
+	contact: {type : Number, required : false}
 },{
 	collection: 'admin',
     timestamps: true,
@@ -37,7 +38,7 @@ module.exports = Admin;
 //var mysql = require('mysql');
 //var Sequelize = require('sequelize');
 //var sequelize = mysql.Sequelize;
-var mysql = require('../mysql');
+/*var mysql = require('../mysql');
 var sequelize = mysql.sequelize;
 var Sequelize = require('sequelize');
 
@@ -106,4 +107,4 @@ var admin = sequelize.define('admin', {
 
 
 
-module.exports = admin;
+module.exports = admin;*/

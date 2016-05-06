@@ -19,14 +19,24 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+
+    <!-- Angular.min file -->
     <script src="/angularjs/angular.min.js"></script>
-    <script src="/dist/js/ng-file-upload.min.js"></script>
-    <script src="/dist/js/ng-file-upload-shim.min.js"></script>
+    <!-- -->
 
     <link href="/dist/css/xeditable.css" rel="stylesheet">
     <script src="/dist/js/xeditable.js"></script>
     <script src="/dist/js/ng-file-upload.min.js"></script>
     <script src="/dist/js/ng-file-upload-shim.min.js"></script>
+
+    <!-- Morris Chart -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="/dist/js/angular-morris-chart.js"></script>
+    <script src="/dist/js/angular-morris-chart.min.js"></script>
+    <!-- Morris Chart End -->
+
     <script src="/angularjs/adminModule.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,25 +65,24 @@
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
+          <!-- <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> -->
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Account</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="/admin/home"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-                <li><a href="/admin/home"><i class="fa fa-circle-o"></i> Statistics</a></li>
                 <li><a href="/admin/profile"><i class="fa fa-circle-o"></i> Profile</a></li>
               </ul>
             </li>
@@ -85,8 +94,8 @@
               <ul class="treeview-menu">
                 <li><a href="/admin/farmers/list"><i class="fa fa-circle-o"></i> Farmers List</a></li>
                 <li><a href="/admin/products/list"><i class="fa fa-circle-o"></i> Products List</a></li>
-                <li><a href="/admin/trucks/list"><i class="fa fa-circle-o"></i> Trucks List</a></li>
-                <li><a href="/admin/drivers/list"><i class="fa fa-circle-o"></i> Drivers List</a></li>
+                <!-- <li><a href="/admin/trucks/list"><i class="fa fa-circle-o"></i> Trucks List</a></li>
+                <li><a href="/admin/drivers/list"><i class="fa fa-circle-o"></i> Drivers List</a></li> -->
                 <li class="active"><a href="/admin/customers/list"><i class="fa fa-circle-o"></i> Customers List</a></li>
                 <li><a href="/admin/orders/list"><i class="fa fa-circle-o"></i> Orders List</a></li>
               </ul>

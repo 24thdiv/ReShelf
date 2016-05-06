@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AmazonFresh Admin | Dashboard</title>
+    <title>Admin | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -30,20 +30,6 @@
     <!-- Morris chart -->
     <link rel="stylesheet" href="/plugins/morris/morris.css">
 
-
-    <!-- Morris Chart -->
-
-    <script src="/angularjs/angular.min.js"></script>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular-morris-chart/1.2.0/angular-morris-chart.min.js"></script> -->
-    <script src="/dist/js/angular-morris-chart.js"></script>
-    <script src="/dist/js/angular-morris-chart.min.js"></script>
-
-    <!-- Morris Chart End -->
-
     <% include lib.ejs %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -66,10 +52,23 @@
       }
     </style>
 
+    <!-- Angular.min file -->
+    <script src="/angularjs/angular.min.js"></script>
+    <!-- -->
+
     <link href="/dist/css/xeditable.css" rel="stylesheet">
     <script src="/dist/js/xeditable.js"></script>
     <script src="/dist/js/ng-file-upload.min.js"></script>
     <script src="/dist/js/ng-file-upload-shim.min.js"></script>
+
+    <!-- Morris Chart -->
+    <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="/dist/js/angular-morris-chart.js"></script>
+    <script src="/dist/js/angular-morris-chart.min.js"></script>
+    <!-- Morris Chart End -->
+
     <script src="/angularjs/adminModule.js"></script>
 
   </head>
@@ -97,11 +96,10 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Account</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="/admin/home"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-                <li><a href="/admin/home"><i class="fa fa-circle-o"></i> Statistics</a></li>
                 <li><a href="/admin/profile"><i class="fa fa-circle-o"></i> Profile</a></li>
               </ul>
             </li>
@@ -113,8 +111,8 @@
               <ul class="treeview-menu">
                 <li><a href="/admin/farmers/list"><i class="fa fa-circle-o"></i> Farmers List</a></li>
                 <li><a href="/admin/products/list"><i class="fa fa-circle-o"></i> Products List</a></li>
-                <li><a href="/admin/trucks/list"><i class="fa fa-circle-o"></i> Trucks List</a></li>
-                <li><a href="/admin/drivers/list"><i class="fa fa-circle-o"></i> Drivers List</a></li>
+                <!-- <li><a href="/admin/trucks/list"><i class="fa fa-circle-o"></i> Trucks List</a></li>
+                <li><a href="/admin/drivers/list"><i class="fa fa-circle-o"></i> Drivers List</a></li> -->
                 <li><a href="/admin/customers/list"><i class="fa fa-circle-o"></i> Customers List</a></li>
                 <li><a href="/admin/orders/list"><i class="fa fa-circle-o"></i> Orders List</a></li>
               </ul>
@@ -134,8 +132,8 @@
             <small>Control panel</small>
           </h1>
           <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i> Home</li>
-            <li class="active">Dashboard</li>
+            <li class="active"><i class="fa fa-dashboard"></i> Home</li>
+            <!-- <li class="active">Dashboard</li> -->
           </ol>
         </section>
 
@@ -242,7 +240,7 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script> -->
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

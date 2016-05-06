@@ -61,11 +61,11 @@ user.controller('adminController',['$scope','$http','$sce','$filter', 'Upload', 
 					"pass" : $scope.pass
 				}
 			}).success(function(data) {
-				if(data.statusCode == 200){
+				if(data.status == 200){
 					console.log("login successful!");
 					//Assigning the page to admin homepage
 					window.location.assign('/admin/home');
-				} else if(data.statusCode == 401) {
+				} else if(data.status == 401) {
 					console.log("login unsuccessful!");
 					console.log("Error : " + data.error);
 					$scope.isBlankEmail = false;
