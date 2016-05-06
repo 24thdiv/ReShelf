@@ -1,400 +1,120 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+
     <title>Home | AmazonFresh</title>
     <% include lib.ejs %>
+    <script type="text/javascript">
+    $('.carousel').carousel();
+    </script>
   </head>
   <body ng-app="amazon" ng-controller="amazon">
   	<% include menu.ejs %>
-    <div style="height: 50px; display: block;"></div>
+     <div style="height: 50px; display: block;"></div>
+
+    <div id="main">
+      
+      <!-- <p id="typing_text1"> Re-Shelf</p>
+      <p id="typing_text"></p> -->
+
     
+    
+    <!-- <div class="carousel slide carousel-fade" data-ride="carousel"> -->
+
+    <!-- Wrapper for slides -->
+<!--     <div class="carousel-inner" role="listbox">
+        <div class="item active">
+<div class="title">
+  <h1 style="color:orange;">ReShelf</h1>
+  <h3>Food is to eat, not to frame and hang on the wall.
+</h3>
+</div>
+        
+
+        
+        </div>
+        <div class="item">
+        </div>
+        <div class="item">
+
+<div class="title">
+  <h1 style="color:white;">ReShelf</h1>
+  <h3>An Application to Remove FoodStamps</h3>
+  <p id="typing_text">sasassa</p>
+</div>      -->
+
+<script src="js/jquery-1.12.3.js"></script>  
+
+<script src="js/typed.js"></script>
+<script>
+  $(function(){
+      $("#typing_text").typed({
+        strings: ["Buy what you need at 20% Rate"],
+        typeSpeed: 60
+      });
+  });
+</script> 
+
+
+
+
+<!-- Remeber to put all the content you want on top of the slider below the slider code -->
+
+
     <div class="container-fluid">
       <div class="col-xs-9">
-        <% include search.ejs %>
-<!-- 
-        Vansh Shah -->
+        <% include search1.ejs %>
 
-        <% include carousel.ejs %>
-
-        <% include product.ejs %>
-
-        <div class="col-xs-12 no-padding" style="margin-top: 15px;">
-          <div class="tiles">
-            <span class="subdue">Browse</span>
-            <span>Categories</span>
-          </div>
-          <ul class="item-wrapper">
-           
-            <li>
-              <img src="img/fruit.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="/search?id=1">FRESH FRUIT >></a>
-                </div>
-                <li>
-                  <a href="#">Apples</a>
-                </li>
-                <li>
-                  <a href="#">Banans</a>
-                </li>
-                <li>
-                  <a href="#">Berries</a>
-                </li>
-                <li>
-                  <a href="#">Citrus</a>
-                </li>
-                <li>
-                  <a href="#">Packaged Fruit</a>
-                </li>
-                <li>
-                  <a href="#">Organic Fruit</a>
-                </li>
-                <li>
-                  <a href="#" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
+        <div class="col-xs-12">
+<div class="row">
+<div class="col-md-6 col-md-offset-5 " align="center;">
+        <p><a href="#">Do you want to help?</a></p>
+       </div></div></div>
 
 
-            <li>
-              <img src="img/3.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="/search?id=2">FRESH VEGETABLES >></a>
-                </div>
-                <li>
-                  <a href="/search?id=2">Carrot</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Corn</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Lettuce</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Sweet Potato</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Onion</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Organic</a>
-                </li>
-                <li>
-                  <a href="/search?id=2" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
+       <div class="col-xs-12">
+<div class="row">
+<div class="col-md-6 col-md-offset-5 " align="center;">
+        <img src="/images/reshelf.jpg">
+       </div></div></div><br><br>
 
 
-
-            <li>
-              <img src="img/egg.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="/search?id=7">Eggs >></a>
-                </div>
-                <li>
-                  <a href="/search?id=7">Eggs and Egg substitute</a>
-                </li>
-                <li>
-                  <a href="/search?id=7">Milk and Cream</a>
-                </li>
-                <li>
-                  <a href="/search?id=7">Yogurt</a>
-                </li>
-                <li>
-                  <a href="/search?id=7">Organic Dairy</a>
-                </li>
-                <li>
-                  <a href="/search?id=7">Dairy Substitute</a>
-                </li>
-                
-                <li>
-                  <a href="/search?id=7" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
-
-
-            <li>
-              <img src="img/2.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="/search?id=1">FRESH FRUIT >></a>
-                </div>
-                <li>
-                  <a href="/search?id=2">Apples</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Banans</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Berries</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Citrus</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Packaged Fruit</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Organic Fruit</a>
-                </li>
-                <li>
-                  <a href="/search?id=2" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
-
-
-
-            <li>
-              <img src="img/nut.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="/search?id=3">Almonds >></a>
-                </div>
-                <li>
-                  <a href="/search?id=3">Nuts</a>
-                </li>
-                <li>
-                  <a href="/search?id=3">Badaam</a>
-                </li>
-                <li>
-                  <a href="/search?id=3">Health</a>
-                </li>
-                <li>
-                  <a href="/search?id=3">Crackers</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Onion</a>
-                </li>
-                <li>
-                  <a href="/search?id=2">Organic</a>
-                </li>
-                <li>
-                  <a href="/search?id=2" class="shop-all">Shop All ></a>
-                </li>
-                <li>
-              </ul>
-            </li>
-           
-
-
-
-            <li>
-              <img src="img/6.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href=""/search?id=1"">FRESH FRUIT >></a>
-                </div>
-                <li>
-                  <a href="#">Apples</a>
-                </li>
-                <li>
-                  <a href="#">Banans</a>
-                </li>
-                <li>
-                  <a href="#">Berries</a>
-                </li>
-                <li>
-                  <a href="#">Citrus</a>
-                </li>
-                <li>
-                  <a href="#">Packaged Fruit</a>
-                </li>
-                <li>
-                  <a href="#">Organic Fruit</a>
-                </li>
-                <li>
-                  <a href="#" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
-
-
-
-            <li>
-              <img src="img/7.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="#">FRESH FRUIT >></a>
-                </div>
-                <li>
-                  <a href="#">Apples</a>
-                </li>
-                <li>
-                  <a href="#">Banans</a>
-                </li>
-                <li>
-                  <a href="#">Berries</a>
-                </li>
-                <li>
-                  <a href="#">Citrus</a>
-                </li>
-                <li>
-                  <a href="#">Packaged Fruit</a>
-                </li>
-                <li>
-                  <a href="#">Organic Fruit</a>
-                </li>
-                <li>
-                  <a href="#" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
-
-
-
-            <li>
-              <img src="img/1.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="#">FRESH FRUIT >></a>
-                </div>
-                <li>
-                  <a href="#">Apples</a>
-                </li>
-                <li>
-                  <a href="#">Banans</a>
-                </li>
-                <li>
-                  <a href="#">Berries</a>
-                </li>
-                <li>
-                  <a href="#">Citrus</a>
-                </li>
-                <li>
-                  <a href="#">Packaged Fruit</a>
-                </li>
-                <li>
-                  <a href="#">Organic Fruit</a>
-                </li>
-                <li>
-                  <a href="#" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
-
-
-
-            <li>
-              <img src="img/2.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="#">FRESH FRUIT >></a>
-                </div>
-                <li>
-                  <a href="#">Apples</a>
-                </li>
-                <li>
-                  <a href="#">Banans</a>
-                </li>
-                <li>
-                  <a href="#">Berries</a>
-                </li>
-                <li>
-                  <a href="#">Citrus</a>
-                </li>
-                <li>
-                  <a href="#">Packaged Fruit</a>
-                </li>
-                <li>
-                  <a href="#">Organic Fruit</a>
-                </li>
-                <li>
-                  <a href="#" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
-
-
-
-            <li>
-              <img src="img/3.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="#">FRESH FRUIT >></a>
-                </div>
-                <li>
-                  <a href="#">Apples</a>
-                </li>
-                <li>
-                  <a href="#">Banans</a>
-                </li>
-                <li>
-                  <a href="#">Berries</a>
-                </li>
-                <li>
-                  <a href="#">Citrus</a>
-                </li>
-                <li>
-                  <a href="#">Packaged Fruit</a>
-                </li>
-                <li>
-                  <a href="#">Organic Fruit</a>
-                </li>
-                <li>
-                  <a href="#" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
-
-
-
-            <li>
-              <img src="img/4.jpg" class="item-img">
-              <ul class="cat-list">
-                <div class="cat-list-name">
-                  <a href="#">FRESH FRUIT >></a>
-                </div>
-                <li>
-                  <a href="#">Apples</a>
-                </li>
-                <li>
-                  <a href="#">Banans</a>
-                </li>
-                <li>
-                  <a href="#">Berries</a>
-                </li>
-                <li>
-                  <a href="#">Citrus</a>
-                </li>
-                <li>
-                  <a href="#">Packaged Fruit</a>
-                </li>
-                <li>
-                  <a href="#">Organic Fruit</a>
-                </li>
-                <li>
-                  <a href="#" class="shop-all">Shop All ></a>
-                </li>
-              </ul>
-            </li>
-           
-
-
-          </ul>
+       <div class="col-xs-12">
+        <div class="row">
+        <div class="col-md-6 col-md-offset-5 " align="center;">
+        <ul class="list-group">
+  <li class="list-group-item"> 1. <a href="#" style="color:grey;">SafeWay</a></li>
+  <li class="list-group-item">2. <a href="#" style="color:grey;">WallMart</a></li>
+  <li class="list-group-item">3. <a href="#" style="color:grey;">Target</a></li>
+  <li class="list-group-item">4. <a href="#" style="color:grey;">Costco</a></li>
+  <li class="list-group-item">5. <a href="#" style="color:grey;">Wallmart</a></li>
+</ul>
+        
+       </div></div></div>
 
 
 
         </div>
-      </div>
-      <div class="col-xs-3">
-        <!-- CART WILL BE HERE -->
-        <% include cart.ejs %>
-      </div>
-    </div>
+
+
+
+       
+
+      </div><br><br>
+     
+
+    
+    </div><br><br><br><br><br><br><br>
+
+
+
+    <br><br><br><br><br><br><br>
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br>
+
 
 
     <% include footer.ejs %>
