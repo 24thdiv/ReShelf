@@ -17,13 +17,13 @@
 				</span> -->
 			</div>
 			<div class="cart-proceed">
-				<div ng-if="cartTotal < 10">
+				<!--<div ng-if="cartTotal < 10">
 					<a href="#">
 						<div class="checkout-btn" style="background: #aaa; cursor: no-drop">Place your Order</div>
 					</a>
-				</div>
+				</div>-->
 				
-				<div ng-if="cartTotal >= 10">
+				<div ng-if="cartTotal > 0">
 					<a href="/PreviewOrder">
 						<div class="btn btn-info btn-block" style="size">Place Your Order</div>
 					</a>
