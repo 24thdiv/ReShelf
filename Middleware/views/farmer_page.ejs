@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Amazon-Fresh</title>
+    <title>ReShelf</title>
     <% include lib.ejs %>
     <script type="text/javascript">
 $(window).load(function(){
@@ -18,16 +18,16 @@ $(window).load(function(){
       <div class="row">
       <div class="col-lg-5">
       <br><br>
-      <h5> Store:  <span style="font-weight: bold; color:green;"><%= farmer.object[0].fname %> <%= farmer.object[0].lname %></span></h5>
-      <h5> Store Email id:  <span style="font-weight: bold; color:green;"><%= farmer.object[0].email %></span> </h5>
-      <h5> Store Details: <span style="font-weight: bold; color:green;"> <%= farmer.object[0].intro %></span> </h5>    
+      <h4> <b>Store:</b>  <span style="font-weight: bold; color:green;"><%= farmer.object[0].fname %> <%= farmer.object[0].lname %></span></h4>
+      <h4> <b>Store Email id:</b>  <span style="font-weight: bold; color:green;"><%= farmer.object[0].email %></span> </h4>
+      <h4> <b>Store Address: </b><span style="font-weight: bold; color:green;"> <%= farmer.object[0].address %></span> </h4>    
     </div>
 <!--       <div class="col-lg-7">
     <iframe width="550" height="350" src="https://www.youtube.com/embed/QuzhwkaNC40">
 </iframe></div>
  -->      
 </div>
-      <h3 style="color: green;">Products by <%= farmer.object[0].fname %></h3>
+      <h3 style="color: green;"><b>Products by <%= farmer.object[0].fname %></b></h3>
       <% for(var i=0; i < products.length; i++) { %>
         <div class="col-xs-3 no-padding">
       <div class="product-wrapper">
@@ -78,14 +78,13 @@ $(window).load(function(){
       </div>
     </div>
     </div>
-    <div class="review" >
+    <!--<div class="review" >
           <h4>Customer Ratings and Reviews</h4><br>
 <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" style="background-color: lightgrey; color: black; border-color: lightgrey;">Create a Review</button>
-  <!-- Modal -->
+  
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
-      <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -135,9 +134,9 @@ $(window).load(function(){
 <% } %>
           
           
-  </div>
+  </div>-->
     
-    <% include footer.ejs %>
+  <!--  <% include footer.ejs %>-->
     <% include js-lib.ejs %>
   </body>
 </html>
