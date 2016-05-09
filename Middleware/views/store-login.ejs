@@ -9,23 +9,10 @@
     <script src="/angularjs/angular.min.js"></script>
     <!-- -->
 
-    <link href="/dist/css/xeditable.css" rel="stylesheet">
-    <script src="/dist/js/xeditable.js"></script>
-    <script src="/dist/js/ng-file-upload.min.js"></script>
-    <script src="/dist/js/ng-file-upload-shim.min.js"></script>
-
-    <!-- Morris Chart -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="/dist/js/angular-morris-chart.js"></script>
-    <script src="/dist/js/angular-morris-chart.min.js"></script>
-    <!-- Morris Chart End -->
-
-    <script src="/angularjs/adminModule.js"></script>
+    <script src="/angularjs/storeLoginModule.js"></script>
 
   </head>
-  <body ng-app="adminModule" ng-controller = "adminController">
+  <body ng-app="storeLoginModule" ng-controller = "storeLoginController">
   	
     <div style="height: 50px; display: block;"></div>
     
@@ -76,7 +63,7 @@
 
       <div class="login-wrapper">
         <div style="margin-bottom: 40px;">
-          <h3><b>Admin Sign In</b></h3>
+          <h3><b>Store Sign In</b></h3>
         </div>
         <form class="pull-left">
           <fieldset class="form-group has-feedback">
@@ -91,9 +78,9 @@
             <span class="glyphicon form-control-feedback"></span>
           </fieldset>
           <div class="pull-right" style="margin-top: -10px">
-            <span class="forgot-pass">
+            <!-- <span class="forgot-pass">
               <a href="#">Forgot password?</a>
-            </span>
+            </span> -->
           </div>
           <input type="submit" class="signin-btn" value="Sign In" ng-click="loginSubmit();">
         </form>

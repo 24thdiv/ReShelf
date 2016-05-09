@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Store | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="/plugins/morris/morris.css">
+
+    <% include lib.ejs %>
+
+    <!-- Angular.min file -->
+    <script src="/angularjs/angular.min.js"></script>
+    <!-- -->
+
+    <link href="/dist/css/xeditable.css" rel="stylesheet">
+    <script src="/dist/js/xeditable.js"></script>
+    <script src="/dist/js/ng-file-upload.min.js"></script>
+    <script src="/dist/js/ng-file-upload-shim.min.js"></script>
+
+    <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
+    <script src="/angularjs/storeModule.js"></script>
+
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini" ng-app= "storeModule" ng-controller="storeController" ng-init="getStoreProducts();">
+    <div class="wrapper">
+      <header class="main-header">
+        <% include ./partials/store-header %>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="/dist/img/user3-160x160.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p><%= name %></p>
+            </div>
+          </div>
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <!-- <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Account</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="/admin/home"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+                <li><a href="/admin/profile"><i class="fa fa-circle-o"></i> Profile</a></li>
+              </ul>
+            </li> -->
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-table"></i> <span>Store Menu</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class= "active"><a href="/store/home"><i class="fa fa-circle-o"></i> Products List</a></li>
+                <li><a href="/store/orders/list"><i class="fa fa-circle-o"></i> Orders List</a></li>
+                <li><a href="/store/profile"><i class="fa fa-circle-o"></i> Profile </a></li>
+              </ul>
+            </li>
+            
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Products
+            <small>All Products</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li class="active"><i class="fa fa-dashboard"></i> Home</li>
+            <!-- <li class="active">Dashboard</li> -->
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content" style="overflow: scroll;">
+          <div class="row">
+            <div class="col-xs-12" style="overflow: scroll; width: auto;">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Products Data Table</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <label ng-show = "isDateWrong" style = "color : red">Expiry Date Invalid!</label>
+                  <table id="example1" class="table table-bordered table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Weight</th>
+                        <th>Unit</th>
+                        <th>Quantity</th>
+                        <th>Expiry Date</th>
+                        <th>Details</th>
+                        <th>Description</th>
+                        <th>Features</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="product in products">
+                        <td>
+                          <span editable-text="product.name" e-name="name" e-form="productform" e-required>
+                             {{ product.name || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <span editable-text="product.price" e-name="price" e-form="productform" e-required>
+                             {{ product.price || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <span editable-text="product.weight" e-name="weight" e-form="productform" e-required>
+                             {{ product.weight || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <span editable-text="product.unit" e-name="unit" e-form="productform" e-required>
+                             {{ product.unit || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <span editable-text="product.quantity" e-name="quantity" e-form="productform" e-required>
+                             {{ product.quantity || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <span editable-text="product.exp_date | date : 'MM-dd-yyyy'" e-name="exp_date" e-form="productform" onbeforesave="checkEditedDate($data)" e-required>
+                             {{ product.exp_date |  date : 'MM-dd-yyyy' || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <span editable-text="product.details" e-name="details" e-form="productform" e-required>
+                             {{ product.details || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <span editable-text="product.description" e-name="description" e-form="productform" e-required>
+                             {{ product.description || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <span editable-text="product.features" e-name="features" e-form="productform" e-required>
+                             {{ product.features || 'empty' }}
+                          </span>
+                        </td>
+                        <td>
+                          <form editable-form name="productform" ng-show="productform.$visible" class="form-buttons form-inline"
+                            shown="inserted == product" onbeforesave="saveProduct($data,product.p_id, product.store_id)">
+                            <button type="submit" ng-disabled="productform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                              Save
+                            </button>
+                            <button type="button" ng-disabled="productform.$waiting" ng-click="productform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                              Cancel
+                            </button>
+                          </form>
+                          <div class="buttons" ng-show="!productform.$visible">
+                            <button class="btn btn-primary editable-table-button btn-xs" ng-click="productform.$show()">Edit</button>
+                            <button class="btn btn-danger editable-table-button btn-xs" ng-click="removeProduct(product.p_id)">Delete</button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Weight</th>
+                        <th>Unit</th>
+                        <th>Quantity</th>
+                        <th>Expiry Date</th>
+                        <th>Details</th>
+                        <th>Description</th>
+                        <th>Features</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <button class="btn btn-default" id = "addproduct" data-toggle = "modal" data-target = "#addProductModal">Add Product</button>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+
+          <!-- Add Cusomer Modal -->
+          <div id="addProductModal" class= "modal fade" role = "dialog">
+            <div class= "modal-dialog modal-md">
+              <!-- Add Driver Modal Content -->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="moda-title">Add Product</h3>
+                </div>
+                <div class="modal-body">
+                  <div role="form" name="addproductform">
+                    <div class="form-group">
+                      <label for="name">Product Name</label>
+                      <input type="text" class="form-control" placeholder="Enter Product Name" name="name" ng-model="name" required>
+                      <!-- <div role="alert">
+                        <span class="error" ng-show="adddriverform.fname.$error.required">Invalid First Name!</span>
+                      </div> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Product Price</label>
+                      <input type="number" class="form-control" placeholder="Enter Product Price" name="price" ng-model="price" required>
+                      
+                      <!-- <div role="alert">
+                        <span class="error" ng-show="adddriverform.fname.$error.required">Invalid First Name!</span>
+                      </div> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Product Weight</label>
+                      <input type="number" class="form-control" placeholder="Enter Product Weight" name="weight" ng-model="weight" required>
+                      
+                      <!-- <div role="alert">
+                        <span class="error" ng-show="adddriverform.fname.$error.required">Invalid First Name!</span>
+                      </div> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Product Unit</label>
+                      <input type="text" class="form-control" placeholder="Enter Product Unit" name="unit" ng-model="unit" required>
+                      
+                      <!-- <div role="alert">
+                        <span class="error" ng-show="adddriverform.fname.$error.required">Invalid First Name!</span>
+                      </div> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Product Quantity</label>
+                      <input type="number" class="form-control" placeholder="Enter Product Quantity" name="quantity" ng-model="quantity" required>
+                      
+                      <!-- <div role="alert">
+                        <span class="error" ng-show="adddriverform.fname.$error.required">Invalid First Name!</span>
+                      </div> -->
+                    </div>
+                    <div class="form-group">
+                      <label>Product Expiry Date</label>
+                      <div class= "row">
+                        <div class = "col-xs-2">
+                          <input type="number" class="form-control" placeholder="mm" name="month" ng-model="month" required>
+                        </div>
+                        <div class = "col-xs-2">
+                          <input type="number" class="form-control" placeholder="dd" name="date" ng-model="date" required>
+                        </div>
+                        <div class = "col-xs-3">
+                          <input type="number" class="form-control" placeholder="yyyy" name="year" ng-model="year" required>
+                        </div>  
+                        <div class = "col-xs-5"></div>
+                      </div>
+                      <div class="alert alert-danger" ng-show = "isDateInValid"> <strong>Invalid Date!</strong> </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="product_img">Product Image</label>
+                      <input type="file" ngf-select ng-model="product_img" name="product_img" accept="image/*" ngf-max-size="3MB" required ngf-model-invalid="errorFile">
+                    </div>
+                    <div class="form-group">
+                      <label for="product_info">Product Details</label>
+                      <input type="text" class="form-control" placeholder="Enter Product details" ng-model="details" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="description">Product Description</label>
+                      <input type="text" class="form-control" placeholder="Enter Product Description" ng-model="description" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="features">Product Features</label>
+                      <input type="text" class="form-control" placeholder="Enter Product Features" ng-model="features" required>
+                    </div>
+                    
+                    <button class="btn btn-default" ng-click="addProduct();">Add Product</button>
+                  </div>
+                </div>
+                <!-- Content End for Modal-->
+              </div>
+            </div>
+          </div>
+          <!-- Add Product Modal End -->
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <% include ./partials/store-footer %>
+      </footer>
+      <% include ./partials/store-aside %> 
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.4 -->
+    <!-- <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script> -->
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="/plugins/morris/morris.min.js"></script>
+    <!-- Sparkline -->
+    <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="/plugins/knob/jquery.knob.js"></script>
+    <!-- daterangepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="/plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/dist/js/app.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="/dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/dist/js/demo.js"></script>
+  </body>
+</html>

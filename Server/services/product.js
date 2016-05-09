@@ -3,6 +3,7 @@ var Farmer = require('./model/farmer');
 var Category = require('./model/category');
 var resGen = require('./commons/responseGenerator');
 var Farmer = require('./model/farmer');
+var Store = require('./model/store');
 
 
 exports.suggest = function(req, callback){
@@ -301,21 +302,78 @@ exports.f_create_review = function(msg, callback){
 
 
 exports.createProduct = function(req, res){
-/*
-		"name" : req.param("name"),
-		"f_id" : req.param("f_id"),
-		//"f_name": req.param("f_name"),
-		"cat_id" : req.param("cat_id"),
-		"price" : req.param("price"),
-		"weight" : req.param("weight"),
-		"unit" : req.param("unit"),
-		"quantity": req.param("quantity"),
-		"details" : req.param("details"),
-		"description" : req.param("description"),
-		"features": req.param("features"),
-		"sid":req.sessionID
-*/	
-	var farmer_name = null;
+
+	//var store_name = req.store_name;
+	var store_email = req.store_email;
+	var name = req.name;
+	var price = req.price;
+	var weight = req.weight;
+	var unit = req.unit;
+	var quantity = req.quantity;
+	var exp_date = req.exp_date;
+	var exp_month = req.exp_month-1;
+	var exp_year = req.exp_year;
+	var details = req.details;
+	var description = req.description;
+	var features = req.features;
+	var product_img = req.product_img;
+	console.log("store_email :: " + store_email);
+	//Store.findOne({email : req.store_email, name : req.store_name}, 'store_id', function(err, results) {
+	Store.findOne({email : req.store_email}, 'store_id name', function(err, results) {
+		if(err) { 
+			console.log("err : " + err);
+			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+			res(null, JSON.stringify(json_responses));
+		} else {
+			console.log(results);
+			if(results != null) {
+				console.log("Store ID Found!");
+
+				var store_id = results.store_id;
+				var store_name = results.name;
+
+				console.log("store_id :: " + store_id);
+				console.log("store_name :: " + store_name);
+
+				var product = Product({
+					store_name : store_name,
+					store_email : store_email,
+					store_id : store_id,
+					name : name,
+					price : price,
+					weight : weight,
+					unit : unit,
+					quantity : quantity,
+					exp_date : new Date(Number(exp_year),Number(exp_month),Number(exp_date),23,59,59,59),
+					details : details,
+					description : description,
+					features : features,
+					product_img : product_img
+				});
+
+				product.save(function(err, data) {
+					if(err) {
+						console.log("err :: " + err);
+						json_responses = {"status" : 401, "error" : "error occurred while executing save query"};
+						res(null, JSON.stringify(json_responses));		
+					} else {
+						console.log("Product Added!");
+						console.log(data);
+						console.log("product after Saving");
+
+						json_responses = {"status" : 200};
+						res(null, JSON.stringify(json_responses));
+					}
+				});
+			} else {
+				console.log("Could not find Store Id!");
+				json_responses = {"status" : 401, "error" : "Could not find Store ID while adding Product!"};
+				res(null, JSON.stringify(json_responses));
+			}
+		}
+	});
+
+	/*var farmer_name = null;
 	console.log("in createProduct");
 	Farmer.findOne({f_id:req.f_id},function(err,result){
 		if(err){
@@ -325,14 +383,14 @@ exports.createProduct = function(req, res){
 		}else{
 			if(result){
 				console.log("result found");
-				farmer_name = result.fname + " " + result.lname;	
-				console.log(farmer_name);	
+				//farmer_name = result.fname + " " + result.lname;	
+				//console.log(farmer_name);	
 				var product = Product({
 					//p_id : req.p_id,
 					name : req.name,
-					f_id: req.f_id,
-					f_name: farmer_name,
-					cat_id: req.cat_id,
+					//f_id: req.f_id,
+					//f_name: farmer_name,
+					//cat_id: req.cat_id,
 					price : req.price,
 					weight : req.weight,
 					unit: req.unit,
@@ -372,24 +430,34 @@ exports.createProduct = function(req, res){
 				res(null,result);
 			}
 		}
-	});
+	});*/
 
 }
 
 exports.editProduct = function(req, res){
 
-	Product.findOne({p_id:req.p_id},{pass:0},function(err,result){
-		if(err)
-		{
-			resGen.error(err,res);
-		}
-		else
-		{
+	console.log(":: edit Product :: ");
+	console.log("exp_year :: " + req.exp_year);
+	console.log("exp_month :: " + req.exp_month);
+	console.log("exp_date :: " + req.exp_date);
+
+	var exp_date = Number(req.exp_date);
+	var exp_month = Number(req.exp_month-1);
+	var exp_year = Number(req.exp_year);
+
+	Product.findOne({p_id:req.p_id}, function(err,result){
+		if(err) {
+			console.log("err : " + err);
+			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+			res(null, JSON.stringify(json_responses));
+		} else {
+			console.log("result finding a product");
 			console.log(result);
 			if(result){
+				console.log("product exist");
 				result.name = req.name;
 				
-				if(result.f_id != req.f_id){
+				/*if(result.f_id != req.f_id){
 					Farmer.find({f_id:req.f_id}, {fname:1,lname:1,f_id:1}, function(err,res){
 						if(err){
 							resGen.error(err,res);
@@ -400,7 +468,7 @@ exports.editProduct = function(req, res){
 					});
 				}
 				console.log(result.f_id);
-				result.cat_id = req.cat_id;
+				result.cat_id = req.cat_id;*/
 				result.price = req.price;
 				result.weight = req.weight;
 				result.unit = req.unit;
@@ -408,14 +476,19 @@ exports.editProduct = function(req, res){
 				result.description = req.description;
 				result.features = req.features;
 				result.quantity = req.quantity;
+				console.log("Before Editing date :: " + result.exp_date);
+				result.exp_date = new Date(Number(exp_year), Number(exp_month), Number(exp_date), 23, 59, 59, 59);
+				console.log("After Editing date :: " + result.exp_date);
 				//result.description = req.description;
 				result.save(function(err,doc){
 					if(err){
-						resGen.error(err,res);
+						console.log("err :: " + err);
+						json_responses = {"status" : 401, "error" : "error occurred while executing edit query"};
+						res(null, JSON.stringify(json_responses));
 					} else {
 						console.log("product edited");
-						//console.log(doc);
-						res(null,resGen.responseGenerator(200, doc));
+						json_responses = {"status" : 200};
+						res(null, JSON.stringify(json_responses));
 					}
 				});
 			}
@@ -429,33 +502,58 @@ exports.editProduct = function(req, res){
 
 exports.deleteProduct = function(req, res){
 
-	console.log(req.p_id);
+	console.log("p_id :: " + req.p_id);
 	Product.findOne({p_id:req.p_id},function(err,result){
-		if(err)
-		{
-			resGen.error(err,res);
-		}
-		else
-		{
+		if(err) {
+			console.log("err : " + err);
+			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+			res(null, JSON.stringify(json_responses));
+		} else {
+			console.log("result finding a product");
 			console.log(result);
 			if(result){
-				//console.log("all products found");
-				//console.log(result);
+				console.log("product exists");
 				result.isActive = false;
 				result.save(function(err,doc){
 					if(err){
-						resGen.error(err,res);
+						console.log("err :: " + err);
+						json_responses = {"status" : 401, "error" : "error occurred while executing delete query"};
+						res(null, JSON.stringify(json_responses));
 					} else {
 						console.log("product inactive now");
-						//console.log(doc);
-						res(null,resGen.responseGenerator(200, doc.isActive));
+						json_responses = {"status" : 200};
+						res(null, JSON.stringify(json_responses));
 					}
 				});
-			}
-			else
-			{
+			} else {
 				console.log("no data delete product");
-				resGen.error(null,res);
+				json_responses = {"status" : 401, "error" : "no data delete product"};
+				res(null, JSON.stringify(json_responses));
+			}
+		}
+	});
+}
+
+exports.getStoreProducts = function(req, res) {
+	console.log("getStoreProducts");
+
+	email = req.email;
+
+	Product.find({store_email : email, isActive:true},function(err,results){
+		if(err) {
+			console.log("err :: " + err);
+			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+			res(null, JSON.stringify(json_responses));
+		} else {
+			console.log(results);
+			if(results != null) {
+				console.log("All Products of '" + email + "' Store Found!");
+				json_responses = {"status" : 200, "data" : results};
+				res(null, JSON.stringify(json_responses));
+
+			} else {
+				json_responses = {"status" : 401, "error" : "no products data found"};
+				res(null, JSON.stringify(json_responses));
 			}
 		}
 	});

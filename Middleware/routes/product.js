@@ -110,19 +110,47 @@ exports.suggest = function(req, res){
 }
 
 exports.createProduct = function(req,res){
+	console.log("createProduct :: Middleware");
 	//if(req.product_img){
-	
+	if(req.session.store)
+		var store_email = req.session.store.email;
+	else
+		var store_email = req.param("store_email");
+
+	console.log("store_email :: " + store_email);
+
+
 	if(true){
 		//var file = req.product_img.path;
 		//console.log(req.product_img);
 		//product_img_filename = file.substr((file.indexOf('\\img\\')+5));
+		
 		var msg_payload = {
+			"service" : "createProduct",
+			//"store_id" : req.param("store_id"),
+			//"store_name" : req.param("store_name"),
+			"store_email" : store_email,
+			"name" : req.param("name"),
+			"price" : req.param("price"),
+			"weight" : req.param("weight"),
+			"unit" : req.param("unit"),
+			"quantity" : req.param("quantity"),
+			"exp_date" : req.param("exp_date"),
+			"exp_month" : req.param("exp_month"),
+			"exp_year" : req.param("exp_year"),
+			"details" : req.param("details"),
+			"description" : req.param("description"),
+			"features" : req.param("features"),
+			"product_img" : req.param("product_img")
+		};
+
+		/*var msg_payload = {
 			"service" : "createProduct",
 			//"p_id" : req.param("p_id"),
 			"name" : req.param("name"),
-			"f_id" : req.param("f_id"),
+			//"f_id" : req.param("f_id"),
 			//"f_name": req.param("f_name"),
-			"cat_id" : req.param("cat_id"),
+			//"cat_id" : req.param("cat_id"),
 			"price" : req.param("price"),
 			"weight" : req.param("weight"),
 			"unit" : req.param("unit"),
@@ -133,27 +161,16 @@ exports.createProduct = function(req,res){
 			"product_img": req.param("product_img"),
 			"image1": req.param("image1"),
 			"sid":req.sessionID
-		};
+		};*/
 
-	  	mq.make_request('product_queue', msg_payload, function(err,doc){
-			if(err)
-			{
-			   // console.log(err);
-				res.send(resGen.responseGenerator(401, null));
-			}
-			else
-			{
+	  	mq.make_request('product_queue', msg_payload, function(err,results){
+			if(err) {
+				console.log("Error occurred while requesting to server for createProduct : " + err);
+				var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
+				res.send(json_resposes);
+			} else {
 
-				doc = JSON.parse(doc);
-				if(doc.status == 200){
-					//console.log("reply from createProduct" + doc);
-
-					res.send(doc);
-				}
-				else
-				{
-					res.send(resGen.responseGenerator(401, null));
-				}
+				res.send(JSON.parse(results));
 			}
 		});
 	}
@@ -164,8 +181,9 @@ exports.fileUpload = function(req,res){
 	//console.log(req.files);
 	if(req.files.product_img){
 		var file = req.files.product_img.path;
-		console.log(file);
+		console.log("file before operation :: " + file);
 		filename = file.substr((file.indexOf('\\img\\')+5));
+		console.log("filename after string operation :: " + filename);
 		//console.log(file);
 		//console.log(filename);
 		//console.log(req.product_img);
@@ -186,46 +204,46 @@ exports.fileUpload = function(req,res){
 
 exports.deleteProduct = function(req,res){
 	
-	if(req.param("p_id").length!=6){
-		res.send(500);
+	var p_id = req.param("p_id");
+	console.log("p_id :: " + p_id)
+
+	if(p_id) {
+		if(p_id.length == 9) {
+			var msg_payload = {
+				"service" : "deleteProduct",
+				"p_id" : req.param("p_id"),
+				"sid":req.sessionID
+			};
+
+		  	mq.make_request('product_queue', msg_payload, function(err,results){
+				if(err) {
+				    console.log("Error occurred while requesting to server for delete product : " + err);
+					var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
+					res.send(json_resposes);
+				} else
+					res.send(JSON.parse(results));
+			});
+		}
+	} else {
+		console.log("Invalid product id!");
+		var json_resposes = {"status" : 401, "error" : "invalid product id!!"};
+		res.send(json_resposes);
 	}
 
-	var msg_payload = {
-		"service" : "deleteProduct",
-		"p_id" : req.param("p_id"),
-		"sid":req.sessionID
-	};
-
-  	mq.make_request('product_queue', msg_payload, function(err,doc){
-		if(err)
-		{
-		    //console.log(err);
-			res.send(resGen.responseGenerator(401, null));
-		}
-		else
-		{
-
-			doc = JSON.parse(doc);
-			if(doc.status == 200){
-				console.log("reply from deleteProduct" + doc);
-				res.send(doc);
-			}
-			else
-			{
-				res.send(resGen.responseGenerator(401, null));
-			}
-		}
-	});
+			
 };
 
 exports.editProduct = function(req,res){
+
+	console.log("edit product");
 
 	var msg_payload = {
 		"service" : "editProduct",
 		"p_id" : req.param("p_id"),
 		"name" : req.param("name"),
-		"f_id": req.param("f_id"),
-		"cat_id" : req.param("cat_id"),
+		"store_id" : req.param("store_id"),
+		//"f_id": req.param("f_id"),
+		//"cat_id" : req.param("cat_id"),
 		"price" : req.param("price"),
 		"weight" : req.param("weight"),
 		"unit": req.param("unit"),
@@ -233,27 +251,19 @@ exports.editProduct = function(req,res){
 		"description" : req.param("description"),
 		"features" : req.param("features"),
 		"quantity" : req.param("quantity"),
+		"exp_date" : req.param("exp_date"),
+		"exp_month" : req.param("exp_month"),
+		"exp_year" : req.param("exp_year"),
 		"sid":req.sessionID
 	};
 
-  	mq.make_request('product_queue', msg_payload, function(err,doc){
-		if(err)
-		{
-		    //console.log(err);
-			res.send(resGen.responseGenerator(401, null));
-		}
-		else
-		{
-
-			doc = JSON.parse(doc);
-			if(doc.status == 200){
-			//	console.log("reply from editProduct" + doc);
-       			res.send(doc);
-			}
-			else
-			{
-				res.send(resGen.responseGenerator(401, null));
-			}
+  	mq.make_request('product_queue', msg_payload, function(err,results){
+		if(err) {
+		    console.log("Error occurred while requesting to server for editProduct : " + err);
+			var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
+			res.send(json_responses);
+		} else {
+			res.send(JSON.parse(results));
 		}
 	});
 };
@@ -483,5 +493,21 @@ exports.farmer_page = function(req,res){
 				res.send("Sorry the product that you are searching for does not exist.");
 			}
 		}
+	});
+};
+
+exports.getStoreProducts = function(req, res){
+	
+	console.log("getStoreProducts");
+
+	var msg_payload = {"service":"getStoreProducts", "email" : req.session.store.email};
+
+  	mq.make_request('product_queue', msg_payload, function(err,results){
+		if(err) {
+		    console.log("Error occurred while requesting to server for getStoreProducts : " + err);
+			var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
+			res.send(json_responses);
+		} else
+			res.send(JSON.parse(results));
 	});
 };

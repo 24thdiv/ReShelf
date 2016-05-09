@@ -14,6 +14,7 @@ var express = require('express')
   , truck = require('./services/truck')
   , driver = require('./services/driver')
   , farmerLogin = require('./services/farmerLogin')
+  , store = require('./services/store')
   , http = require('http')
   , path = require('path')
   , amqp = require('amqp')
@@ -280,6 +281,17 @@ cnn.on('ready', function(){
 					});
 					break;
 
+				case "getStoreProducts":
+					util.log("getStoreProducts");
+					product.getStoreProducts(message, function(err,res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+							contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;
+
 
 
 			}
@@ -330,7 +342,72 @@ cnn.on('ready', function(){
 		});
 	});
 
+	console.log("listening on store_queue");
+	
+	cnn.queue('store-queue', function(q){
+		q.subscribe(function(message, headers, deliveryInfo, m){
 
+			switch (message.service) {
+				
+				//Store related oprations
+				case "checkLogin":
+					util.log("checkLogin");
+					store.checkLogin(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+							contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;
+
+				case 'getStores' :
+					util.log("getStores");
+					store.getStores(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+							contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;	
+
+				case 'createStore' :
+					util.log("createStore");
+					store.createStore(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+							contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;
+
+				case 'editStore':
+					util.log("editStore");
+					store.editStore(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+							contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;
+
+				case 'deleteStore':
+					util.log("deleteStore");
+					store.deleteCustomer(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+								contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;
+					//Store realated oprations end
+			};
+		});
+	});
 
 
 // 	cnn.queue('user_queue', function(q){

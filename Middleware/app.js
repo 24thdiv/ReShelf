@@ -16,7 +16,9 @@ var express = require('express')
   , driver =  require('./routes/driver')
   ,farmerLogin = require('./routes/farmerLogin')
   //ADMIN
-  , admin = require('./routes/admin');
+  , admin = require('./routes/admin')
+  //STORE
+  , store = require('./routes/store');
 
 //JUST FOR PASSPORT LOGIN
 var passport = require('passport');
@@ -27,8 +29,8 @@ var mongoose = require('mongoose');
 mongoose.connect("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
 //mongoose.connect("mongodb://localhost:27017/reshelf");
 
-//var mongoURL = "mongodb://localhost:27017/reshelf";
 var mongoURL = "mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf";
+//var mongoURL = "mongodb://localhost:27017/reshelf";
 var expressSession = require("express-session");
 var mongoStore = require("connect-mongo")(expressSession);
 
@@ -73,6 +75,12 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/PreviewOrder', isAuthenticated, order.home);
+
+//STORE API
+app.get('/store/home',store.home);
+app.get('/store/login',store.login);
+app.get('/store/logout', store.logout);
+app.post('/store/checkLogin', store.checkLogin);
 
 
 //ADMIN API
@@ -181,11 +189,13 @@ app.get('/user/address',user.getAddress);
 app.get('/user/orders',order.orderDetails);
  //app.get('/user/orders',user.getOrders);
 
+//PRODUCT API
+app.get('/product/store', product.getStoreProducts);
 
 app.get('/product/all',product.getProducts);
 app.post('/product/create',product.createProduct);
 
-app.post('/fileUpload', product.fileUpload);
+app.post('/fileUpload', product.fileUpload);//file uploading
 
 app.delete('/product/delete',product.deleteProduct);
 app.post('/product/edit',product.editProduct);

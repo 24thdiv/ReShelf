@@ -15,8 +15,8 @@ exports.getDrivers = function(req, res) {
 	mq.make_request('driver-queue', msg_payload,function(err, results) {
 		if(err) {
 			console.log("Error occurred while requesting to server for getDrivers : " + err);
-			var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
-			res.send(json_resposes);
+			var json_responses = {"status" : 401, "error" : "Could not connect to server"};
+			res.send(json_responses);
 		} else
 			res.send(JSON.parse(results));
 	});
