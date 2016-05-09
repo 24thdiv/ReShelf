@@ -3,7 +3,7 @@
   <head>
 
 
-    <title>Home | AmazonFresh</title>
+    <title>Home | ReShelf</title>
     <% include lib.ejs %>
     <script type="text/javascript">
     $('.carousel').carousel();
@@ -66,11 +66,11 @@
       <div class="col-xs-9">
         <% include search1.ejs %>
 
-        <div class="col-xs-12">
+       <!-- <div class="col-xs-12">
 <div class="row">
 <div class="col-md-6 col-md-offset-5 " align="center;">
         <p><a href="#">Do you want to help?</a></p>
-       </div></div></div>
+       </div></div></div>-->
 
 
        <div class="col-xs-12">
@@ -80,7 +80,7 @@
        </div></div></div><br><br>
 
 
-       <div class="col-xs-12">
+      <!-- <div class="col-xs-12">
         <div class="row">
         <div class="col-md-6 col-md-offset-5 " align="center;">
         <ul class="list-group">
@@ -91,11 +91,18 @@
   <li class="list-group-item">5. <a href="#" style="color:grey;">Wallmart</a></li>
 </ul>
         
-       </div></div></div>
+       </div></div></div>-->
+
+
 
 
 
         </div>
+
+        <div class="col-xs-3">
+        <!-- CART WILL BE HERE -->
+        <% include cart.ejs %>
+      </div>
 
 
 
@@ -105,19 +112,61 @@
      
 
     
-    </div><br><br><br><br><br><br><br>
+    </div>
+
+<div class="col-lg-3"></div>
+<div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" >
+                           <b> Stores </b>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Store Name</th>
+                                            <th>Address</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                           
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+
+<div class="col-lg-3"></div>
+    
 
 
 
-    <br><br><br><br><br><br><br>
+    
 
 
 
-    <br><br><br><br><br><br><br><br><br><br><br>
-
-
-
-    <% include footer.ejs %>
+  <!--  <% include footer.ejs %>-->
     <% include js-lib.ejs %>
   </body>
 </html>
