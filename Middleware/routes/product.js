@@ -113,11 +113,11 @@ exports.createProduct = function(req,res){
 	console.log("createProduct :: Middleware");
 	//if(req.product_img){
 	if(req.session.store)
-		var store_email = req.session.store.email;
+		var email = req.session.store.email;
 	else
-		var store_email = req.param("store_email");
+		var email = req.param("email");
 
-	console.log("store_email :: " + store_email);
+	console.log("store_email :: " + email);
 
 
 	if(true){
@@ -129,7 +129,7 @@ exports.createProduct = function(req,res){
 			"service" : "createProduct",
 			//"store_id" : req.param("store_id"),
 			//"store_name" : req.param("store_name"),
-			"store_email" : store_email,
+			"email" : email,
 			"name" : req.param("name"),
 			"price" : req.param("price"),
 			"weight" : req.param("weight"),
@@ -241,7 +241,7 @@ exports.editProduct = function(req,res){
 		"service" : "editProduct",
 		"p_id" : req.param("p_id"),
 		"name" : req.param("name"),
-		"store_id" : req.param("store_id"),
+		"f_id" : req.param("f_id"),
 		//"f_id": req.param("f_id"),
 		//"cat_id" : req.param("cat_id"),
 		"price" : req.param("price"),
@@ -330,10 +330,15 @@ exports.prod_search = function(req,res){
 		regexp = new RegExp('(^|\\s+)'+name,'i')
 		searchData.name = regexp;	
 	}
-	
+		
+	//var currentDate = new Date();
+	//console.log("current Date :: " + currentDate);
+
+	//searchData.exp_date = {"gte" : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0, 0)};
+	//searchData.exp_date = {"gte" : currentDate};
 	//console.log(searchData);
 
-	Product.find(searchData, function(err, product){
+	Product.find(searchData , function(err, product){
 
 		if(typeof req.session.user != 'undefined'){
 			res.render('ProductSearch', { user: req.session.user, products: product, session: true });

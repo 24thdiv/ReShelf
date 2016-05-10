@@ -61,7 +61,7 @@
               <img src="/dist/img/user3-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p><%= name %></p>
+              <p><%= fname %></p>
             </div>
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -180,7 +180,7 @@
                         </td>
                         <td>
                           <form editable-form name="productform" ng-show="productform.$visible" class="form-buttons form-inline"
-                            shown="inserted == product" onbeforesave="saveProduct($data,product.p_id, product.store_id)">
+                            shown="inserted == product" onbeforesave="saveProduct($data,product.p_id, product.f_id)">
                             <button type="submit" ng-disabled="productform.$waiting" class="btn btn-primary editable-table-button btn-xs">
                               Save
                             </button>

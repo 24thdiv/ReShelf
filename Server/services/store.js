@@ -5,6 +5,7 @@
 
 //REQUIRED FILES
 var Store = require('./model/store');
+var Farmer = require('./model/farmer');
 
 //checkLogin
 exports.checkLogin = function(req, res){
@@ -52,7 +53,7 @@ exports.checkLogin = function(req, res){
 						
 					
 
-	Store.findOne({email : email, pass : pass}, 'store_id name email', function(err, results) {
+	/*Store.findOne({email : email, pass : pass}, 'store_id name email', function(err, results) {
 		if(err) { 
 			console.log("err : " + err);
 			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
@@ -74,6 +75,60 @@ exports.checkLogin = function(req, res){
 				res(null, JSON.stringify(json_responses));
 			}
 		}
+	});*/
+
+	var farmer = Farmer({
+				fname : "Walgreens",
+				email : "walgreens@gmail.com",
+				pass : '123456',
+				address : "5 S 1st St",
+				city : "San Jose",
+				state : "California",
+				zipcode : 95113,
+				isActive : true,
+				tax : 8,
+				contacts : 4082830835,
+				intro : "Drugstore chain with health & beauty aids, prescriptions & photo services, plus mini-mart basics.",
+				longitude : "37.33576499999999",
+				latitude : "-121.890759"
+			});
+
+	farmer.save(function(err, data) {
+		if(err) {
+			console.log("err :: " + err);
+			//json_responses = {"status" : 401, "error" : "error occurred while executing save query"};
+			//res(null, JSON.stringify(json_responses));
+				
+		} else {
+			console.log("Store Added!");
+			//json_responses = {"status" : 200};
+			//res(null, JSON.stringify(json_responses));
+		
+
+	Farmer.findOne({email : email, pass : pass}, 'f_id fname email', function(err, results) {
+		if(err) { 
+			console.log("err : " + err);
+			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+			res(null, JSON.stringify(json_responses));
+		} else {
+			console.log(results);
+			if(results != null) {
+				console.log("Store Login Successful!");
+				json_responses = {
+					"status" : 200, 
+					"fname" : results.fname,
+					"email" : results.email,
+					"f_id" : results.f_id
+				};
+				res(null, JSON.stringify(json_responses));
+			} else {
+			console.log("Unsuccessful Login for Store!");
+				json_responses = {"status" : 401, "error" : "Invalid Login!"};
+				res(null, JSON.stringify(json_responses));
+			}
+		}
+	});
+	}
 	});
 	
 };
@@ -82,7 +137,7 @@ exports.checkLogin = function(req, res){
 exports.getStores = function(req, res) {
 	console.log("getStores");
 
-	Store.find(function(err, results) {
+	Farmer.find(function(err, results) {
 		if(err) {
 			console.log("err :: " + err);
 			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
@@ -108,7 +163,7 @@ exports.createStore = function(req, res){
 	console.log("create store :: ");
 	var newStore = req.newStore;
 
-	Store.findOne({email : newStore[0].email, pass : newStore[0].pass}, function(err, results) {
+	Farmer.findOne({email : newStore[0].email, pass : newStore[0].pass}, function(err, results) {
 		if(err) {
 			console.log("err :: " + err);
 			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
@@ -119,8 +174,8 @@ exports.createStore = function(req, res){
 				json_responses = {"status" : 401, "error" : "store Exists"};
 				res(null, JSON.stringify(json_responses));
 			} else {
-				var store = Store({
-					name : newStore[0].fname,
+				var farmer = Farmer({
+					fname : newStore[0].fname,
 					email : newStore[0].email,
 					pass : newStore[0].pass,
 					intro : newStore[0].intro,
@@ -132,7 +187,7 @@ exports.createStore = function(req, res){
 					zipcode : newStore[0].zipcode
 				});
 
-				store.save(function(err, data) {
+				farmer.save(function(err, data) {
 					if(err) {
 						console.log("err :: " + err);
 						json_responses = {"status" : 401, "error" : "error occurred while executing save query"};
@@ -151,8 +206,8 @@ exports.createStore = function(req, res){
 exports.editStore = function(req, res) {
 
 	console.log("editStore");
-	var store_id = req.store_id;
-	var name = req.name;
+	var f_id = req.f_id;
+	var fname = req.fname;
 	var email = req.email;
 	var address = req.address;
 	var city = req.city;
@@ -162,7 +217,7 @@ exports.editStore = function(req, res) {
 	var intro = req.intro;
 	var tax = req.tax;
 
-	Store.findOne({store_id : store_id}, function(err, result){
+	Farmer.findOne({f_id : f_id}, function(err, result){
 		if(err) {
 			console.log("err :: " + err);
 			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
@@ -172,7 +227,7 @@ exports.editStore = function(req, res) {
 			console.log(result);
 			if(result) {
 				console.log("store exist");
-				result.name = name;
+				result.fname = fname;
 				result.email = email;
 				result.address = address;
 				result.city = city;
@@ -204,7 +259,7 @@ exports.deleteStore = function(req, res ) {
 	console.log("delete store");
 	var store_id = req.store_id;
 
-	Store.remove({store_id : store_id}, function(err, result) {
+	Farmer.remove({f_id : f_id}, function(err, result) {
 		if(err) {
 			console.log("err :: " + err);
 			json_responses = {"status" : 401, "error" : "error occurred while executing remove query"};

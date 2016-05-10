@@ -227,13 +227,13 @@ store.controller('storeController',['$scope','$http','$sce','$filter', 'Upload',
 
 	}
 
-	$scope.saveProduct = function(data, id, store_id) {
+	$scope.saveProduct = function(data, id, f_id) {
 		
 		console.log("Save Product");
 		angular.extend(data, {id:id});
 		console.log(data);
 		console.log("product id :: " + id);
-		console.log("store_id :: " + store_id);
+		console.log("f_id :: " + f_id);
 
 		var exp_date_full = data.exp_date;
 		console.log("exp_date_full :: " + exp_date_full);
@@ -263,7 +263,7 @@ store.controller('storeController',['$scope','$http','$sce','$filter', 'Upload',
 			url : '/product/edit',
 			data : {
 				p_id : id,
-				store_id : store_id,
+				f_id : f_id,
 				name : data.name,
 				price : data.price,
 				weight : data.weight,

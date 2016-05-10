@@ -3,7 +3,7 @@ var Farmer = require('./model/farmer');
 var Category = require('./model/category');
 var resGen = require('./commons/responseGenerator');
 var Farmer = require('./model/farmer');
-var Store = require('./model/store');
+//var Store = require('./model/store');
 
 
 exports.suggest = function(req, callback){
@@ -304,7 +304,7 @@ exports.f_create_review = function(msg, callback){
 exports.createProduct = function(req, res){
 
 	//var store_name = req.store_name;
-	var store_email = req.store_email;
+	var email = req.email;
 	var name = req.name;
 	var price = req.price;
 	var weight = req.weight;
@@ -317,9 +317,9 @@ exports.createProduct = function(req, res){
 	var description = req.description;
 	var features = req.features;
 	var product_img = req.product_img;
-	console.log("store_email :: " + store_email);
+	console.log("store_email :: " + email);
 	//Store.findOne({email : req.store_email, name : req.store_name}, 'store_id', function(err, results) {
-	Store.findOne({email : req.store_email}, 'store_id name', function(err, results) {
+	Farmer.findOne({email : req.email}, 'f_id fname', function(err, results) {
 		if(err) { 
 			console.log("err : " + err);
 			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
@@ -329,16 +329,16 @@ exports.createProduct = function(req, res){
 			if(results != null) {
 				console.log("Store ID Found!");
 
-				var store_id = results.store_id;
-				var store_name = results.name;
+				var f_id = results.f_id;
+				var f_name = results.fname;
 
-				console.log("store_id :: " + store_id);
-				console.log("store_name :: " + store_name);
+				console.log("store_id :: " + f_id);
+				console.log("store_name :: " + f_name);
 
 				var product = Product({
-					store_name : store_name,
-					store_email : store_email,
-					store_id : store_id,
+					f_name : f_name,
+					email : email,
+					f_id : f_id,
 					name : name,
 					price : price,
 					weight : weight,
@@ -539,7 +539,7 @@ exports.getStoreProducts = function(req, res) {
 
 	email = req.email;
 
-	Product.find({store_email : email, isActive:true},function(err,results){
+	Product.find({email : email, isActive:true},function(err,results){
 		if(err) {
 			console.log("err :: " + err);
 			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};

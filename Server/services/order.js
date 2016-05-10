@@ -94,6 +94,7 @@ exports.createOrder = function(req, callback) {
 							eachItemDetail = {
 									p_id: items[i].p_id,
 									f_id: items[i].f_id,
+									store_id : items[i].store_id,
 									'qty': cartItemDetails[i].qty,
 									'price': totalEachitem[i].total
 								}

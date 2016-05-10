@@ -29,47 +29,49 @@ $(window).load(function(){
 </div>
       <h3 style="color: green;">Products by <%= farmer.object[0].fname %></h3>
       <% for(var i=0; i < products.length; i++) { %>
-        <div class="col-xs-3 no-padding">
-      <div class="product-wrapper">
-        <div class="itemInnerBorader">
-          <a href="/product?id=<%= products[i].p_id %>">
-            <img src="<%= products[i].product_img %>" class="" style="width: 140px; height: 140px; margin: 35px 45px 20px;">
-          </a>
-          <div class="productDetails">
-            <div>
-              <b>$<%= products[i].price %></b>
-              <span class="unitPrice"> ($<%= products[i].price_unit %>/<%= products[i].unit %>) </span>
-            </div>
-            <div class="shortDetail capitalize">
-              <a href="#">
-                <%= products[i].name %>, <%= products[i].weight %> <%= products[i].unit %>
-              </a>
-            </div>
-            <div class="bottomProduct">
-              <div class="form-group pull-left">
-                <select class="form-control productQuant" id="product<%= products[i].p_id %>">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
+        <% if(products[i].isActive == true) { %>
+          <div class="col-xs-3 no-padding">
+            <div class="product-wrapper">
+              <div class="itemInnerBorader">
+                <a href="/product?id=<%= products[i].p_id %>">
+                  <img src="<%= products[i].product_img %>" class="" style="width: 140px; height: 140px; margin: 35px 45px 20px;">
+                </a>
+                <div class="productDetails">
+                  <div>
+                    <b>$<%= products[i].price %></b>
+                    <span class="unitPrice"> ($<%= products[i].price_unit %>/<%= products[i].unit %>) </span>
+                  </div>
+                  <div class="shortDetail capitalize">
+                    <a href="#">
+                      <%= products[i].name %>, <%= products[i].weight %> <%= products[i].unit %>
+                    </a>
+                  </div>
+                  <div class="bottomProduct">
+                    <div class="form-group pull-left">
+                      <select class="form-control productQuant" id="product<%= products[i].p_id %>">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                    </div>
+                    <% if(typeof user == 'object') {%>
+                      <button class="add-to-cart" ng-click="addItem(<%= products[i].p_id %>)">Add</button>
+                    <% }else{ %>
+                      <button class="add-to-cart" style="background: #aaa; cursor: not-allowed; color: #fff">Add</button>
+                    <% } %>
+                  </div>
+                </div>
               </div>
-              <% if(typeof user == 'object') {%>
-                <button class="add-to-cart" ng-click="addItem(<%= products[i].p_id %>)">Add</button>
-              <% }else{ %>
-                <button class="add-to-cart" style="background: #aaa; cursor: not-allowed; color: #fff">Add</button>
-              <% } %>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+      <% } %>          
     <% } %>
       </div>
       <div class="col-xs-3">

@@ -13,10 +13,10 @@ var reviewSchema = mongoose.Schema({
 });
 
 var farmerSchema = mongoose.Schema({
-	f_id: {type: Number, required: true, index: true},
+	f_id: {type: Number, required: true, index: true},//f_id is store_id
 	isActive : {type: Boolean, default: false},
-	fname: {type: String, required: true},
-	lname: {type: String, required: true},
+	fname: {type: String, required: true},//fname is store name
+	lname: {type: String, required: false},//don't need lname
 	email: {type: String, required: true},
 	pass: {type: String, required: true},
 	intro: {type: String, required: true, default: "Hello!"},
@@ -27,9 +27,10 @@ var farmerSchema = mongoose.Schema({
 	city: {type: String, required: true, default: "Your City"},
 	state: {type: String, required: true, default: "Your State"},
 	zipcode: {type: Number, required:true, default: 12345},
-	reviews: [reviewSchema],
-
-	isAvailable: {type: Boolean,default:true},
+	reviews: [reviewSchema], //no needed
+	longitude : {type : Number},
+	latitude : {type : Number},
+	isAvailable: {type: Boolean,default:true}, //no needed
 
 },{
 	collection: 'farmers',

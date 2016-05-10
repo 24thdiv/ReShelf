@@ -81,7 +81,7 @@ app.get('/store/home',store.home);
 app.get('/store/login',store.login);
 app.get('/store/logout', store.logout);
 app.post('/store/checkLogin', store.checkLogin);
-
+app.get('/store/order/list', store.ordersList);
 
 //ADMIN API
 app.get('/admin/home',admin.home);

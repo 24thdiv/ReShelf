@@ -47,7 +47,7 @@ exports.checkLogin = function(req, res) {
 
 					var store = {
 						"email" : email,
-						"name" : dataParsed.name
+						"fname" : dataParsed.fname
 					};
 
 					req.session.store = store;
@@ -71,15 +71,29 @@ exports.checkLogin = function(req, res) {
 
 //store home page
 exports.home = function(req, res){
-  if(req.session!= null && req.session.store!= null &&  req.session.store.email) {
+  if(req.session!= null && req.session.store!= null && req.session.store.email) {
   	//Set these headers to notify the browser not to maintain any cache for the page being loaded
     res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     res.render('store-index', {
   	 email : req.session.store.email, 
-  	 name : req.session.store.name
+  	 fname : req.session.store.fname
     });
   }
   else {
   	res.redirect('/store/login');
   }
 };
+
+exports.ordersList = function(req, res) {
+	if(req.session!= null && req.session.store!= null &&  req.session.store.email) {
+  	//Set these headers to notify the browser not to maintain any cache for the page being loaded
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.render('store-ordersList', {
+  	 email : req.session.store.email, 
+  	 fname : req.session.store.fname
+    });
+  }
+  else {
+  	res.redirect('/store/login');
+  }
+}
