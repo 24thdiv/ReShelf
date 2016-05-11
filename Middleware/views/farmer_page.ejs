@@ -38,9 +38,12 @@ $(window).load(function(){
                 </a>
                 <div class="productDetails">
                   <div>
-                    <b>$<%= products[i].price %></b>
-                    <span class="unitPrice"> ($<%= products[i].price_unit %>/<%= products[i].unit %>) </span>
-                  </div>
+              <h5><b>$<%= products[i].price %></b> <span  class="glyphicon glyphicon-remove" style="align:right; color:red; font-weight: bold;"></span></h5>
+             <h5> New Price: <span style="color:black; font-weight: bold;">$<%= ((products[i].price)*0.2).toFixed(2) %></span></h5>
+
+
+              <!-- <span class="unitPrice"> ($<%= products[i].price_unit %>/<%= products[i].unit %>) </span> -->
+            </div>
                   <div class="shortDetail capitalize">
                     <a href="#">
                       <%= products[i].name %>, <%= products[i].weight %> <%= products[i].unit %>

@@ -125,10 +125,10 @@ app.controller("amazon",function($scope, $http, $location){
 			alertline('alert-notify-danger','<b>Please provide card details.</b>');
 			return;
 		}
-		if(window.isAddress == 'no'){
+		/*if(window.isAddress == 'no'){
 			alertline('alert-notify-danger','<b>Please provide delivery address.</b>');	
 			return;
-		}
+		}*/
 		dayDate = angular.element('#dayDate').val();
 		time = angular.element('#time').val();
 		temp = new Date();

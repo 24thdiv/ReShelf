@@ -70,7 +70,8 @@ $(window).load(function(){
     <span id="rating_2" class="rating" data-val="0" data-stars="5" data-change="false"></span>
 </div>-->
 <div class="price">
-                <span class="value"><h4><strong>$<%= products.object[0].price %></strong>  ($<%= products.object[0].price_unit %>/<%= products.object[0].unit %>)</h4></span>
+                <span class="value"><h4>$ <%= products.object[0].price %> <strong class="glyphicon glyphicon-remove" style="color: red"></strong> 
+                <h4 style="font-weight: bold;">New Price: $ <%= ((products.object[0].price)*0.2).toFixed(2) %></h4> </span>
 </div><br></div>
 
 <div class="row">
@@ -114,6 +115,7 @@ $(window).load(function(){
      <% include cart.ejs %>
  </div>
 <% if(value == true) { %>
+
 <div class="row">
   <div class="col-sm-10">
   
