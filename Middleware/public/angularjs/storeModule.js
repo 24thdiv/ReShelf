@@ -5,7 +5,7 @@ store.controller('storeController',['$scope','$http','$sce','$filter', 'Upload',
 	
 	/*
 	-------Created by Darshil Saraiya 05/05/16-------
-	-------Updated by Darshil Saraiya 05/08/16-------
+	-------Updated by Darshil Saraiya 05/10/16-------
 	-------Store product-list Page operations-------
 	*/
 	$scope.getStoreProducts = function(){
@@ -315,5 +315,151 @@ store.controller('storeController',['$scope','$http','$sce','$filter', 'Upload',
 				});
 		//	}
 		//}
+	};
+	/*
+		Store product-list operations end
+	*/
+
+	/*
+	-------Created by Darshil Saraiya 05/10/16-------
+	-------Updated by Darshil Saraiya 05/10/16-------
+	-------Store order-list Page operations-------
+	*/
+	
+	$scope.getAllStoreOrders = function(){
+		console.log("get all store orders");
+		
+		$http({
+			method : "POST",
+			url : '/store/orders/all'
+		}).success(function(res) {
+			if(res.status == 200) {
+				console.log("res.data :: ");
+				console.log(res.data);
+
+				console.log("f_id :: ");
+				console.log(res.f_id);
+				
+				$scope.orders = res.data;
+				$scope.f_id = res.f_id;
+			} else if(res.status == 401) {
+				console.log("error :: Angular :: " + res.error);
+			}
+		}).error(function(err) {
+			console.log("error in getStoreProducts :: " + err);
+		});
+	};
+
+	$scope.total = 0;
+	$scope.isShowStoreOrderDetails = false;
+	$scope.showStoreOrderDetails = function(order) {
+		console.log("showStoreFullOrder");
+
+		console.log("order_id :: " + order.o_id);
+
+		$scope.isShowStoreOrderDetails = true;
+		$scope.total = 0;
+
+		console.log(order);
+
+		$scope.orderDetails = order;
+
+		for(var index = 0; index < order.order_detail.length;index++) {
+
+			console.log("product id : " + (index+1) + " :: " + order.order_detail[index].p_id);
+			console.log("product qty : " + (index+1) + " :: " + order.order_detail[index].qty);
+			console.log("product price : " + (index+1) + " :: " + order.order_detail[index].price);
+			if(order.order_detail[index].f_id == $scope.f_id)
+				$scope.total = $scope.total + order.order_detail[index].price;
+		}
+		/*http({
+			method : "POST",
+			url : '/store/orderDetails',
+			data : {
+				o_id : o_id
+			}
+		}).success(function(res) {
+			if(res.status == 200) {
+				$scope.orderDetails = res.data;
+			} else if(res.status == 401) {
+				console.log("Error :: " + res.error);
+			}
+		}).error(function(err) {
+			console.log("Error :: Angular :: " + err);
+		});*/
 	}
+
+	$scope.changeIsShowStoreOrderDetails = function() {
+		$scope.isShowStoreOrderDetails = false;
+	}
+	/*
+		Store order-list page operations end
+	*/
+
+	/*
+	-------Created by Darshil Saraiya 05/11/16-------
+	-------Updated by Darshil Saraiya 05/11/16-------
+	-------Store Profile Page operations-------
+	*/
+	$scope.isProfileNotFound = false;
+	$scope.getStoreProfile = function(){
+		$scope.isProfileNotFound = false;
+		$http({
+			method : 'POST',
+			url : '/store/getStoreProfile'
+		}).success(function(res) {
+			console.log(res);
+			if(res.status == 200) {
+				$scope.isProfileNotFound = false;
+				//res.data.zipCode = Number(res.data.zipCode);
+				$scope.farmer = res.data;
+			} else {
+				$scope.isProfileNotFound = true;
+			}
+		}).error(function(error) {
+			console.log("error : " + error);
+		});
+	}
+
+	$scope.saveStoreProfile = function(data, id) {
+		angular.extend(data, {id: id});
+		console.log("saveStoreProfile data::");
+		console.log(data);
+		console.log("f_id :: " + id);
+		//if(data && id) {
+			//if(data.number.length == 7 && id.length == 9){
+				$http({
+					method : "POST",
+					url : '/store/saveStoreProfile',
+					data: {
+						f_id : id,
+						fname : data.fname,
+						email : data.email,
+						pass : data.pass,
+						intro : data.intro,
+						contacts : data.contacts,
+						address : data.address,
+						city : data.city,
+						state : data.state,
+						zipcode : data.zipcode
+					}
+				}).success(function(res){
+					if (res.status === 200) {
+						console.log("success on save farmer" + res.data);
+						//res.data.zipCode = Number(res.data.zipCode);
+						$scope.farmer = res.data;
+						return;
+					} else if(res.status == 401) {
+						console.log("error :: " + res.error);
+						window.alert("Error : " + res.error);
+					}
+				}).error(function(error) {
+					console.log("error : " + error);
+				});
+
+
+	}
+	/*
+		Store Profile page operations end
+	*/
 }]);

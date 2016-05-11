@@ -4,7 +4,7 @@ var User = require('./model/user');
 var Cart = require('./model/cart');
 var cart = require('./cart');
 var resGen = require('./commons/responseGenerator');
-
+var Farmer = require('./model/farmer');
 
 
 
@@ -390,5 +390,73 @@ exports.getRevenue = function(req, res) {
 			}
 		}
 	});
-	
+};
+
+exports.allStoreOrders = function(req, res) {
+	console.log("allStoreOrders :: ");
+
+	var email = req.email;
+
+	console.log("email :: " + email);
+
+	Farmer.findOne({email : email}, 'f_id', function(err, results) {
+		if(err) {
+			console.log("err :: " + err);
+			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+			res(null, JSON.stringify(json_responses));
+		} else {
+			if(results != null){
+				var f_id = results.f_id;
+				console.log("f_id is :: " + f_id);
+				Order.find({"order_detail.f_id" : f_id}, function(error, doc) {
+					if(error) {
+						console.log("err :: " + err);
+						json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+						res(null, JSON.stringify(json_responses));
+					} else {
+						if(doc != null) {
+							console.log(doc);
+							json_responses = {"status" : 200, "data" : doc, "f_id" : f_id};
+							res(null, JSON.stringify(json_responses));
+						} else {
+							json_responses = {"status" : 401, "error" : "No store orders found"};
+							res(null, JSON.stringify(json_responses));
+						}
+					}
+				});			
+			} else {
+				console.log("err :: " + err);
+				json_responses = {"status" : 401, "error" : "can not find store id!"};
+				res(null, JSON.stringify(json_responses));
+			}
+		}
+	});
 }
+
+/*exports.orderStoreDetails = function(req, res) {
+	console.log("orderStoreDetails");
+
+	var email = req.email;
+	var o_id = req.o_id;
+
+	console.log("email of a store :: " + email);
+	console.log("o_id :: " + o_id);
+
+	Farmer.findOne({email : email}, 'f_id', function(err, results) {
+		if(err) {
+			console.log("err :: " + err);
+			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+			res(null, JSON.stringify(json_responses));
+		} else {
+			if(results != null){
+				var f_id = results.f_id;
+				Order.find({"o_id" : o_id, "order_detail.f_id" : f_id})			
+			} else {
+				console.log("err :: " + err);
+				json_responses = {"status" : 401, "error" : "can not find while store id!"};
+				res(null, JSON.stringify(json_responses));
+			}
+		}
+	});
+	
+}*/

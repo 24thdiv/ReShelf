@@ -259,7 +259,7 @@ exports.saveAdminProfile = function(req, res) {
 		}
 	});
 
-	admin.sync();
+	//admin.sync();
 
 	/*admin.findOne({where :{a_id : a_id}})
 		.then(function(result) {

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Store | Profile</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+
+    <% include lib.ejs %>
+
+    <!-- Angular.min file -->
+    <script src="/angularjs/angular.min.js"></script>
+    <!-- -->
+
+    <link href="/dist/css/xeditable.css" rel="stylesheet">
+    <script src="/dist/js/xeditable.js"></script>
+    <script src="/dist/js/ng-file-upload.min.js"></script>
+    <script src="/dist/js/ng-file-upload-shim.min.js"></script>
+
+    <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
+    <script src="/angularjs/storeModule.js"></script>
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini" ng-app="storeModule" ng-controller="storeController" ng-init="getStoreProfile()">
+    <div class="wrapper">
+      <header class="main-header">
+        <% include ./partials/store-header %>
+      </header>
+
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="/dist/img/user3-160x160.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p><%= fname %></p>
+            </div>
+          </div>
+         
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-table"></i> <span>Store Menu</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/store/home"><i class="fa fa-circle-o"></i> Products List</a></li>
+                <li><a href="/store/orders/list"><i class="fa fa-circle-o"></i> Orders List</a></li>
+                <li class= "active"><a href="/store/profile"><i class="fa fa-circle-o"></i> Profile </a></li>
+              </ul>
+            </li>
+            
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            <%= fname %>
+            <small>Profile</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li class="active"><i class="fa fa-dashboard"></i> Profile</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <div ng-show="isProfileNotFound" style="color:#db2e2e">Can not Get Profile. Please try again!</div>
+                <form editable-form name="storeEditForm" onaftersave="saveStoreProfile($data,farmer.f_id)">
+                  
+                  </br>
+
+                  <div>
+                    <span class="title">Store Name : </span>
+                    <span editable-text="farmer.fname" e-name="fname" e-required>{{ farmer.fname || 'empty' }}</span>
+                  </div> 
+
+                  </br>
+                  
+                  </br>
+                  
+                  <div>
+                    <span class="title">Email : </span>
+                    <span editable-text="farmer.email" e-name="email" data-type="email" e-required>{{ farmer.email || 'empty' }}</span>
+                  </div> 
+                  
+                  </br>
+                  
+                  <div>
+                    <span class="title">Password : </span>
+                    <span editable-password="farmer.pass" e-name="pass" data-type="password" e-required>{{ farmer.pass || 'empty' }}</span>
+                  </div> 
+                  
+                  </br>
+
+                  <div>
+                    <span class="title">Introduction : </span>
+                    <span editable-text="farmer.intro" e-name="intro" e-required>{{ farmer.intro || 'empty' }}</span>
+                  </div> 
+                  
+                  </br>
+
+                  <div>
+                    <span class="title">Contact : </span>
+                    <span editable-text="farmer.contacts" e-name="contacts" data-type="number" e-required>{{ farmer.contacts || 'empty' }}</span>
+                  </div> 
+                  
+                  </br>
+                  
+                  <div>
+                    <span class="title">Address : </span>
+                    <span editable-text="farmer.address" e-name="address" e-required>{{ farmer.address || 'empty' }}</span>
+                  </div>
+                  
+                  </br> 
+                  
+                  <div>
+                    <span class="title">City : </span>
+                    <span editable-text="farmer.city" e-name="city" e-required>{{ farmer.city || 'empty' }}</span>
+                  </div>
+
+                  </br>
+
+                  <div>  
+                    <span class="title">State : </span>
+                    <span editable-text="farmer.state" e-name="state" e-required>{{ farmer.state || 'empty' }}</span>
+                  </div>
+
+                  </br>
+
+                  <div>
+                    <span class="title">Zipcode : </span>
+                    <span editable-number="farmer.zipcode" e-name="zipcode" e-required>{{ farmer.zipcode || 'empty' }}</span>
+                  </div> 
+                  
+                  </br>
+
+                  <div class="buttons">
+                    <!-- button to show form -->
+                    <button type="button" class="btn btn-default" ng-click="storeEditForm.$show()" ng-show="!storeEditForm.$visible">
+                      Edit
+                    </button>
+                    <!-- buttons to submit / cancel form -->
+                    <span ng-show="storeEditForm.$visible">
+                      <button type="submit" class="btn btn-primary" ng-disabled="storeEditForm.$waiting">
+                        Save
+                      </button>
+                      <button type="button" class="btn btn-default" ng-disabled="storeEditForm.$waiting" ng-click="storeEditForm.$cancel()">
+                        Cancel
+                      </button>
+                    </span>
+                  </div>
+                </form>  
+
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" >
+
+            </div><!-- ./col -->
+          </div><!-- /.row -->
+          <!-- Main row -->
+          <div class="row">
+            <!-- Left col -->
+          </div><!-- /.row (main row) -->
+
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <% include ./partials/store-footer %>
+      </footer>
+      <% include ./partials/store-aside %> 
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <!-- <div class="control-sidebar-bg"></div> -->
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.4 -->
+    
+    <!-- Bootstrap 3.3.5 -->
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="/plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+      /*$(function () {
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
+      });*/
+    </script>
+  </body>
+</html>

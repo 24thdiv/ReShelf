@@ -29,8 +29,8 @@ var mongoose = require('mongoose');
 mongoose.connect("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
 //mongoose.connect("mongodb://localhost:27017/reshelf");
 
-var mongoURL = "mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf";
-//var mongoURL = "mongodb://localhost:27017/reshelf";
+//var mongoURL = "mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf";
+var mongoURL = "mongodb://localhost:27017/reshelf";
 var expressSession = require("express-session");
 var mongoStore = require("connect-mongo")(expressSession);
 
@@ -81,7 +81,12 @@ app.get('/store/home',store.home);
 app.get('/store/login',store.login);
 app.get('/store/logout', store.logout);
 app.post('/store/checkLogin', store.checkLogin);
-app.get('/store/order/list', store.ordersList);
+app.get('/store/orders/list', store.ordersList);
+app.post('/store/orders/all', order.allStoreOrders);
+app.get('/store/profile', store.profile)
+app.post('/store/getStoreProfile', store.getStoreProfile);
+app.post('/store/saveStoreProfile', store.saveStoreProfile);
+//app.post('/store/orderDetails', order.orderStoreDetails);
 
 //ADMIN API
 app.get('/admin/home',admin.home);

@@ -77,20 +77,20 @@ exports.checkLogin = function(req, res){
 		}
 	});*/
 
-	var farmer = Farmer({
-				fname : "Walgreens",
-				email : "walgreens@gmail.com",
+	/*var farmer = Farmer({
+				fname : "Costco Wholesale",
+				email : "costco@gmail.com",
 				pass : '123456',
-				address : "5 S 1st St",
+				address : "2201 Senter Rd",
 				city : "San Jose",
 				state : "California",
-				zipcode : 95113,
+				zipcode : 95112,
 				isActive : true,
-				tax : 8,
-				contacts : 4082830835,
-				intro : "Drugstore chain with health & beauty aids, prescriptions & photo services, plus mini-mart basics.",
-				longitude : "37.33576499999999",
-				latitude : "-121.890759"
+				tax : 7.8,
+				contacts : 4088046584,
+				intro : "Enjoy low warehouse prices on name-brands products ...",
+				longitude : 37.3098977,
+				latitude : -121.8522164
 			});
 
 	farmer.save(function(err, data) {
@@ -103,6 +103,8 @@ exports.checkLogin = function(req, res){
 			console.log("Store Added!");
 			//json_responses = {"status" : 200};
 			//res(null, JSON.stringify(json_responses));
+			}
+	});*/
 		
 
 	Farmer.findOne({email : email, pass : pass}, 'f_id fname email', function(err, results) {
@@ -128,8 +130,7 @@ exports.checkLogin = function(req, res){
 			}
 		}
 	});
-	}
-	});
+	
 	
 };
 
@@ -278,3 +279,86 @@ exports.deleteStore = function(req, res ) {
 		}
 	});
 };
+
+exports.getStoreProfile = function(req, res) {
+
+	console.log("getStoreProfile");
+	var email = req.email;
+
+	Farmer.findOne({email : email}, 'f_id fname email pass intro contacts address city state zipcode', function(err, results) {
+			if(err) { 
+				console.log("err : " + err);
+				json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+				res(null, JSON.stringify(json_responses));
+			} else {
+				console.log(results);
+				if(results != null) {
+					console.log(results);
+					
+					json_responses = {
+						"status" : 200, 
+						"data" : results
+					};
+					res(null, JSON.stringify(json_responses));
+
+				} else {
+					console.log("Cannot get Store Profile Details!");
+					json_responses = {"status" : 401, "error" : "Cannot get Store Profile Details"};
+					res(null, JSON.stringify(json_responses));
+				}
+			}
+		});
+}
+
+exports.saveStoreProfile = function(req, res) {
+
+	console.log("saveStoreProfile");
+
+	var f_id = req.f_id;
+	var fname = req.fname;
+	var email = req.email;
+	var pass = req.pass;
+	var intro = req.intro;
+	var contacts = req.contacts;
+	var address = req.address;
+	var city = req.city;
+	var state = req.state;
+	var zipcode = req.zipcode;
+
+	Farmer.findOne({f_id : f_id}, function(err, result){
+		if(err) {
+			console.log("err :: " + err);
+			json_responses = {"status" : 401, "error" : "error occurred while executing find query"};
+			res(null, JSON.stringify(json_responses));
+		} else {
+			console.log("result finding a store");
+			console.log(result);
+			if(result) {
+				console.log("store exist");
+				result.fname = fname;
+				result.email = email;
+				result.pass = pass;
+				result.intro = intro;
+				result.contacts = contacts;
+				result.address = address;
+				result.city = city;
+				result.state = state;
+				result.zipcode = zipcode;
+
+				result.save(function(err, doc) {
+					if(err) {
+						console.log("err :: " + err);
+						json_responses = {"status" : 401, "error" : "error occurred while executing edit query"};
+						res(null, JSON.stringify(json_responses));		
+					} else {
+						console.log("edited & saved profile :");
+						console.log(doc);
+						console.log("store edited!");
+						json_responses = {"status" : 200, "data" : doc};
+						res(null, JSON.stringify(json_responses));
+					}
+				});
+			}
+		}
+	});
+}

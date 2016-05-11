@@ -8,8 +8,6 @@ var ejs = require("ejs");
 
 
 //get Order Details
-
-
 exports.orderDetails = function(req,res){
 
 	var msg_payload = {
@@ -242,3 +240,55 @@ exports.getRevenue = function(req, res) {
 		res.redirect('/admin/login'); 		
 	}
 }
+
+//getting all Store Orders
+exports.allStoreOrders = function(req, res) {
+	console.log("allStoreOrders");
+
+	if(req.session!= null && req.session.store!= null &&  req.session.store.email) {
+		
+		//messege payload for sending to server
+		msg_payload = {"service" : "allStoreOrders", "email" : req.session.store.email};
+
+		//making request to the server
+		mq.make_request('order_queue', msg_payload,function(err, results) {
+			if(err) {
+				console.log("Error occurred while requesting to server for allStoreOrders : " + err);
+				var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
+				res.send(json_resposes);
+			} else
+				res.send(JSON.parse(results));
+		});
+	} else {
+		res.redirect('/store/login');
+	}
+}
+
+/*exports.orderStoreDetails = function(req, res) {
+	console.log("orderStoreDetails");
+
+	if(req.session!= null && req.session.store!= null &&  req.session.store.email) {
+		
+		var o_id = req.param("o_id");
+
+		console.log("Order Id :: " + o_id);
+		
+		//messege payload for sending to server
+		msg_payload = {"service" : "orderStoreDetails", "email" : req.session.store.email, "o_id" : o_id};
+
+		//making request to the server
+		mq.make_request('order_queue', msg_payload,function(err, results) {
+			if(err) {
+				console.log("Error occurred while requesting to server for orderStoreDetails : " + err);
+				var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
+				res.send(json_resposes);
+			} else
+				res.send(JSON.parse(results));
+		});
+
+	} else {
+		req.redirect('/store/login');
+	}
+
+
+}*/

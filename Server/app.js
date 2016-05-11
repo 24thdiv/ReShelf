@@ -43,8 +43,8 @@ if ('development' == app.get('env')) {
 app.get('/users', user.list);
 
 
-var mongoConnectURL = "mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf";
-//var mongoConnectURL = "mongodb://localhost:27017/reshelf";
+//var mongoConnectURL = "mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf";
+var mongoConnectURL = "mongodb://localhost:27017/reshelf";
 var cnn = amqp.createConnection({host:'127.0.0.1'});
 
 // connect to the mongo collection session and then createServer
@@ -404,6 +404,28 @@ cnn.on('ready', function(){
 						});
 					});
 					break;
+
+				case 'getStoreProfile':
+					util.log("getStoreProfile");
+					store.getStoreProfile(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+								contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;
+
+				case 'saveStoreProfile':
+					util.log("saveStoreProfile");
+					store.saveStoreProfile(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+								contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;
 					//Store realated oprations end
 			};
 		});
@@ -580,16 +602,38 @@ cnn.on('ready', function(){
 					});
 					break;
 
-					case 'orderDetails':
-					//util.log("createOrder");
-					order.orderDetails(message, function(err, res){
+				case 'orderDetails':
+				//util.log("createOrder");
+				order.orderDetails(message, function(err, res){
+					cnn.publish(m.replyTo, JSON.stringify(res), {
+						contentType: 'application/json',
+						contentEncoding: 'utf-8',
+						correlationId: m.correlationId
+					})
+				});
+					break;
+				
+				case 'allStoreOrders':
+					util.log("allStoreOrders");
+					order.allStoreOrders(message, function(err, res){
 						cnn.publish(m.replyTo, JSON.stringify(res), {
 							contentType: 'application/json',
 							contentEncoding: 'utf-8',
 							correlationId: m.correlationId
-						})
+						});
 					});
 					break;
+
+				/*case 'orderStoreDetails' :
+					util.log("orderStoreDetails");
+					order.orderStoreDetails(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+							contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;*/
 
 				case 'getPending':
 					util.log("getPending");
