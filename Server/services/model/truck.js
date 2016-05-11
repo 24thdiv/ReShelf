@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var autoIncrement = require('mongoose-auto-increment');
-//var connection = mongoose.createConnection("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
-var connection = mongoose.createConnection("mongodb://localhost:27017/reshelf");
+var connection = mongoose.createConnection("mongodb://admin:adminadmin@ds013172.mlab.com:13172/reshelf");
+//var connection = mongoose.createConnection("mongodb://localhost:27017/reshelf");
 autoIncrement.initialize(connection);
 
 var truckSchema = mongoose.Schema({
