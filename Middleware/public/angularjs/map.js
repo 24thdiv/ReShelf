@@ -62,7 +62,8 @@ $scope.getStores = function() {
                         city : mapData[index].fname,
                         desc : mapData[index].address+ ', ' +mapData[index].city + ', ' + mapData[index].zipcode,
                         lat : mapData[index].longitude,
-                        long : mapData[index].latitude
+                        long : mapData[index].latitude,
+                        f_id : mapData[index].f_id
                     }
                 }
 
@@ -109,9 +110,11 @@ $scope.initialise = function() {
                 animation: google.maps.Animation.DROP,
                 title: info.city
             });
+           
+
             marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
             google.maps.event.addListener(marker, 'click', function(){
-                infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                infoWindow.setContent('<a style="color:blue; text-decoration: underline;" href="/farmer_page?id='+info.f_id+'"><h4>' + marker.title + '</h4></a>' + marker.content);
                 infoWindow.open($scope.dvMap, marker);
             });
             $scope.markers.push(marker);
