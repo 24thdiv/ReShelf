@@ -89,6 +89,8 @@ app.get('/store/profile', store.profile)
 app.post('/store/getStoreProfile', store.getStoreProfile);
 app.post('/store/saveStoreProfile', store.saveStoreProfile);
 //app.post('/store/orderDetails', order.orderStoreDetails);
+//Home page map get stores
+app.post('/store/getStores', store.getStores);
 
 //ADMIN API
 app.get('/admin/home',admin.home);

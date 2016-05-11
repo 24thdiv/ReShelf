@@ -190,3 +190,20 @@ exports.saveStoreProfile = function(req, res) {
 /*
 	Store Profile page operations end
 */
+
+//Home Page Map Get Stores
+exports.getStores = function(req, res) {
+          //messege payload for sending to server
+          msg_payload = {"service" : "getStores"};
+
+          //making request to the server
+          mq.make_request('store-queue', msg_payload,function(err, results) {
+            if(err) {
+              console.log("Error occurred while requesting to server for getStores : " + err);
+              var json_resposes = {"status" : 401, "error" : "Could not connect to server"};
+              res.send(json_resposes);
+            } else
+                res.send(JSON.parse(results));
+          });
+}
+//end

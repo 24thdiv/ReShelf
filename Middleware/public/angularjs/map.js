@@ -1,7 +1,7 @@
 var maps = angular.module('mapctr',[]);
 
-
-var cities = [
+var cities = new Array();
+/*var cities = [
     {
         city : 'Location 1',
         desc : 'Test',
@@ -32,11 +32,50 @@ var cities = [
         lat : 35.241874,
         long : -120.883568 
     }
-];
+];*/
 
 
 maps.controller('mapctr',['$scope','$http', function($scope,$http,$ionicLoading){
 
+$scope.getStores = function() {
+    console.log("get Stores on init");
+
+    $http({
+        method : 'POST',
+        url : '/store/getStores'
+    }).success(function(res) {
+        console.log("in success");
+        if(res){
+            if(res.status == 200) {
+                console.log("successfuly gotten stores");
+                console.log(res.data);
+                var mapData = res.data;
+
+                console.log("mapData.length :: " + mapData.length);
+
+                for(var index = 0; index < mapData.length; index++) {
+                  /*  console.log("index :: " + index);
+                    console.log("longitude :: " + mapData[index].longitude);
+                    console.log("latitude :: " + mapData[index].latitude);
+                   */ 
+                    cities[index] = {
+                        city : mapData[index].fname,
+                        desc : mapData[index].address+ ', ' +mapData[index].city + ', ' + mapData[index].zipcode,
+                        lat : mapData[index].longitude,
+                        long : mapData[index].latitude
+                    }
+                }
+
+                google.maps.event.addDomListener(document.getElementById("dvMap"), 'load', $scope.initialise());
+
+            } else if(res.status == 401) {
+                console.log("error :: angular :: " + res.error);
+            }
+        }
+    }).error(function(err){
+        console.log("error :: " + err);
+    });
+}
 
 $scope.initialise = function() {
         var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
@@ -82,7 +121,7 @@ $scope.initialise = function() {
         }
 
     };
-    google.maps.event.addDomListener(document.getElementById("dvMap"), 'load', $scope.initialise());
+    //google.maps.event.addDomListener(document.getElementById("dvMap"), 'load', $scope.initialise());
 
 
 $scope.searchItemRedirect = function(){
