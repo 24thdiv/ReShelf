@@ -72,6 +72,8 @@ if ('development' == app.get('env')) {
 
 
 //GET REQUEST
+
+app.get('/map', admin.map);
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/PreviewOrder', isAuthenticated, order.home);

@@ -236,3 +236,10 @@ exports.ordersList = function(req,res){
     res.redirect('/admin/login');
   }
 };
+
+
+exports.map = function(req,res){
+     console.log("in admin map");
+      res.render('map');
+  
+};
