@@ -295,6 +295,16 @@ app.get('/addressDetails', function(req, res){
   }
   });
 
+
+app.get('/', function(req, res){
+  if(typeof req.session.user !== 'undefined'){
+    console.log(req.session.user);
+    res.render('map', { user: req.session.user });
+  }else{
+    res.render('map');
+  }
+  });
+
 app.get('/conditions', function(req, res){
   if(typeof req.session.user !== 'undefined'){
     console.log(req.session.user);

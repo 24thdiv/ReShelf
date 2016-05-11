@@ -50,7 +50,7 @@ $scope.getStores = function() {
                 console.log("successfuly gotten stores");
                 console.log(res.data);
                 var mapData = res.data;
-
+                $scope.mapTable = res.data;
                 console.log("mapData.length :: " + mapData.length);
 
                 for(var index = 0; index < mapData.length; index++) {
@@ -82,7 +82,7 @@ $scope.initialise = function() {
         var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
         var mapOptions = {
             center: myLatlng,
-            zoom: 16,
+            zoom: 13,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
