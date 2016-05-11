@@ -73,8 +73,8 @@ if ('development' == app.get('env')) {
 
 //GET REQUEST
 
-app.get('/map', admin.map);
-app.get('/', routes.index);
+
+//app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/PreviewOrder', isAuthenticated, order.home);
 
@@ -301,6 +301,16 @@ app.get('/conditions', function(req, res){
     res.render('conditions', { user: req.session.user });
   }else{
     res.render('conditions');
+  }
+  });
+
+
+app.get('/', function(req, res){
+  if(typeof req.session.user !== 'undefined'){
+    console.log(req.session.user);
+    res.render('map', { user: req.session.user });
+  }else{
+    res.render('map');
   }
   });
 
