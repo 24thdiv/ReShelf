@@ -182,7 +182,7 @@ exports.fileUpload = function(req,res){
 	if(req.files.product_img){
 		var file = req.files.product_img.path;
 		console.log("file before operation :: " + file);
-		filename = file.substr((file.indexOf('\\img\\')+5));
+		filename = file.substr((file.indexOf('\/img\/')+5));
 		console.log("filename after string operation :: " + filename);
 		//console.log(file);
 		//console.log(filename);
