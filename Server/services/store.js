@@ -77,20 +77,19 @@ exports.checkLogin = function(req, res){
 		}
 	});*/
 
-	var farmer = Farmer({
-				fname : "Costco Wholesale",
-				email : "costco@gmail.com",
+	/*var farmer = Farmer({
+				fname : "Safeway",
+				email : "safeway@gmail.com",
 				pass : '123456',
-				address : "2201 Senter Rd",
+				address : "100 S Seconde St",
 				city : "San Jose",
 				state : "California",
 				zipcode : 95112,
 				isActive : true,
-				tax : 7.8,
-				contacts : 4088046584,
-				intro : "Enjoy low warehouse prices on name-brands products ...",
-				longitude : 37.3098977,
-				latitude : -121.8522164
+				contacts : 40922531335,
+				intro : "Shop for Groceries, find out about our grocery stores.",
+				longitude : 37.3347943,
+				latitude : -121.8875759
 			});
 
 	farmer.save(function(err, data) {
@@ -103,7 +102,8 @@ exports.checkLogin = function(req, res){
 			console.log("Store Added!");
 			//json_responses = {"status" : 200};
 			//res(null, JSON.stringify(json_responses));
-			
+		}
+	});*/	
 		
 
 	Farmer.findOne({email : email, pass : pass}, 'f_id fname email', function(err, results) {
@@ -129,11 +129,6 @@ exports.checkLogin = function(req, res){
 			}
 		}
 	});
-
-	}
-	});
-	
-	
 };
 
 //get Stores

@@ -27,7 +27,7 @@
 
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDuiDw7TZPGDoAhZO_ghj1ygRzp52V-mcw"></script>
   </head>
-  <body ng-app="mapctr" ng-controller="mapctr">
+  <body ng-app="mapctr" ng-controller="mapctr" ng-init="getStores();">
   	   <% include menu.ejs %>
      <div style="height: 50px; display: block;"></div>
 
@@ -82,27 +82,13 @@
                                             <th>#</th>
                                             <th>Store Name</th>
                                             <th>Address</th>
-                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                           
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            
+                                        <tr ng-repeat="store in mapTable">
+                                            <td>{{$index + 1}}</td>
+                                            <td><a style="color:blue; text-decoration: underline;" href="/farmer_page?id={{store.f_id}}">{{store.fname}}</a></td>
+                                            <td>{{store.address}} ,{{store.zipcode}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

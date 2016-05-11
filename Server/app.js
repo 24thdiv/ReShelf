@@ -349,6 +349,18 @@ cnn.on('ready', function(){
 
 			switch (message.service) {
 				
+				//Home Page Map get Stores
+				case "getStores":
+					util.log("getStores");
+					store.getStores(message, function(err, res){
+						cnn.publish(m.replyTo, JSON.stringify(res), {
+							contentType: 'application/json',
+							contentEncoding: 'utf-8',
+							correlationId: m.correlationId
+						});
+					});
+					break;
+
 				//Store related oprations
 				case "checkLogin":
 					util.log("checkLogin");

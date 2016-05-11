@@ -73,8 +73,8 @@ if ('development' == app.get('env')) {
 
 //GET REQUEST
 
-app.get('/map', admin.map);
-app.get('/', routes.index);
+
+//app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/PreviewOrder', isAuthenticated, order.home);
 
@@ -89,6 +89,8 @@ app.get('/store/profile', store.profile)
 app.post('/store/getStoreProfile', store.getStoreProfile);
 app.post('/store/saveStoreProfile', store.saveStoreProfile);
 //app.post('/store/orderDetails', order.orderStoreDetails);
+//Home page map get stores
+app.post('/store/getStores', store.getStores);
 
 //ADMIN API
 app.get('/admin/home',admin.home);
@@ -293,12 +295,32 @@ app.get('/addressDetails', function(req, res){
   }
   });
 
+
+app.get('/', function(req, res){
+  if(typeof req.session.user !== 'undefined'){
+    console.log(req.session.user);
+    res.render('map', { user: req.session.user });
+  }else{
+    res.render('map');
+  }
+  });
+
 app.get('/conditions', function(req, res){
   if(typeof req.session.user !== 'undefined'){
     console.log(req.session.user);
     res.render('conditions', { user: req.session.user });
   }else{
     res.render('conditions');
+  }
+  });
+
+
+app.get('/', function(req, res){
+  if(typeof req.session.user !== 'undefined'){
+    console.log(req.session.user);
+    res.render('map', { user: req.session.user });
+  }else{
+    res.render('map');
   }
   });
 
