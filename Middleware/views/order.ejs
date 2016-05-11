@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Amazon-Fresh</title>
+    <title>ReShelf</title>
     <% include lib.ejs %>
 
 
@@ -78,7 +78,7 @@
               </div>
             </div>
             <div ng-if="cartTotal > 0">
-              <div class="checkout-btn place_order" style="cursor: pointer;" ng-click="finalOrder()">
+              <div class="btn btn-info" style="cursor: pointer; padding: 2px 30px;" ng-click="finalOrder()">
                 Place Order
               </div>
             </div>
@@ -90,7 +90,7 @@
               </span>
               <br><br>
               <a href="">
-                <div class="btn btn-warning btn-xs">
+                <div class="btn btn-info">
                   <a href="/">Add additional items</a>
                 </div>
               </a>
