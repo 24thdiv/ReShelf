@@ -78,7 +78,7 @@
               </div>
             </div>
             <div ng-if="cartTotal > 0">
-              <div class="btn btn-info" style="cursor: pointer; padding: 2px 30px;" ng-click="finalOrder()">
+              <div class="checkout-btn place_order" style="cursor: pointer;" ng-click="finalOrder()">
                 Place Order
               </div>
             </div>
@@ -97,21 +97,29 @@
             </div>
             <div>
               <ul style="list-style-type: none; font-size: 18px; margin-top: 15px;">
-                <li style="margin: 2px 0">
-                  <span style="color: #669900">Item Subtotal: </span>
-                  <span>${{ cartTotal*0.2|number:2 }}</span>
+
+              <li style="margin: 2px 0; color:red;" class="glyphicon glyphicon-remove">
+                  <span style="color: black;">Original Price </span>
+                  <span style="font-weight: bold;">${{ cartTotal }}</span>
                 </li>
+
+
+                <li style="margin: 2px 0; color:green;" class="glyphicon glyphicon-ok">
+                  <span style="color: black;">Discounted Price: </span>
+                  <span style="font-weight: bold;">${{ cartTotal*0.2|number:2 }}</span>
+                </li>
+                                
                <!--  <li style="margin: 2px 0">
                   <span style="color: #669900">Delivery Charge: </span>
                   <span>${{ delivery_charge }}</span>
                 </li> -->
-                <li style="margin: 2px 0 6px; padding-bottom: 6px; border-bottom: 1px #aaa dashed; width: 220px">
-                  <span style="color: #669900">Estimated Tax*: </span>
-                  <span>${{ tax*0.2 | number:2}}</span>
-                </li>
-                <li style="margin: 4px 0">
-                  <span style="color: #669900">Total: </span>
-                  <span>${{ (cartTotal*0.2)+(tax*0.2) |number:2}}</span>
+                <li style="margin: 2px 0 6px; padding-bottom: 6px; border-bottom: 1px #aaa dashed; width: 220px" class="glyphicon glyphicon-oil">
+                  <span style="color: black;">Estimated Tax: </span>
+                  <span style="font-weight: bold;">${{ tax*0.2 | number:2}}</span>
+                </li><br>
+                <li style="margin: 4px 0" class="glyphicon glyphicon-plus">
+                  <span >Total: </span>
+                  <span style="font-weight: bold; color:green;">${{ (cartTotal*0.2)+(tax*0.2) |number:2}}</span>
                 </li>
               </ul>
             </div>
