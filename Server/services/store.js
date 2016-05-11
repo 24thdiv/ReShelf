@@ -77,7 +77,7 @@ exports.checkLogin = function(req, res){
 		}
 	});*/
 
-	/*var farmer = Farmer({
+	var farmer = Farmer({
 				fname : "Costco Wholesale",
 				email : "costco@gmail.com",
 				pass : '123456',
@@ -103,8 +103,7 @@ exports.checkLogin = function(req, res){
 			console.log("Store Added!");
 			//json_responses = {"status" : 200};
 			//res(null, JSON.stringify(json_responses));
-			}
-	});*/
+			
 		
 
 	Farmer.findOne({email : email, pass : pass}, 'f_id fname email', function(err, results) {
@@ -129,6 +128,9 @@ exports.checkLogin = function(req, res){
 				res(null, JSON.stringify(json_responses));
 			}
 		}
+	});
+
+	}
 	});
 	
 	
