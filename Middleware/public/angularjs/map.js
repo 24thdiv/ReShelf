@@ -128,7 +128,11 @@ $scope.initialise = function() {
 
 
 $scope.searchItemRedirect = function(){
-    window.location.assign("/search/?search="+$scope.q);
+	if(typeof $scope.q === "undefined") 
+   		window.location.assign("/search/?search=");
+	else
+		window.location.assign("/search/?search="+$scopr.q);
+
   }
 
 
