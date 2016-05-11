@@ -74,7 +74,7 @@ function otherCharge(req, callback){
 		}
 	}
 	taxChargeLoop(0, function(){
-		totalTax = totalTax.toFixed(2);
+		
 		delivery_charge = '5.00';
 		returnData = { tax: totalTax, delivery_charge: delivery_charge };
 		callback(null, returnData);

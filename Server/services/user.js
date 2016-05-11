@@ -122,14 +122,11 @@ exports.editCard = function(req, res){
 		{
 			if(result){
 				console.log(result);
-				if(creditcard.validate(req.card_number))
-				{
+				
 				console.log("Correct Credit Card Number");
 				result.card_number = req.card_number;
-			}
-			else {
-				console.log("Invalid Credit Card Number");
-			}
+			
+			
 				result.name_on_card = req.name_on_card;
 				result.exp_month = req.exp_month;
 				result.exp_year = req.exp_year;
