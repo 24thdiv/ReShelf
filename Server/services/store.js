@@ -129,9 +129,6 @@ exports.checkLogin = function(req, res){
 			}
 		}
 	});
-	
-	
-	
 };
 
 //get Stores
