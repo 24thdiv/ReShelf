@@ -275,6 +275,8 @@ exports.prod_details = function(req,res){
 		"p_id" : req.param("id"),
 		"sid":req.session.user
 	};
+
+	console.log("prod_details msg_payload :: " + msg_payload);
 var avg_rating=0;var total_rating=0;var t_length=0;
 	console.log(msg_payload);
   	mq.make_request('product_queue', msg_payload, function(err,prod){
@@ -341,10 +343,12 @@ exports.prod_search = function(req,res){
 	Product.find(searchData , function(err, product){
 
 		if(typeof req.session.user != 'undefined'){
+			console.log(product[0].exp_date);
 			res.render('ProductSearch', { user: req.session.user, products: product, session: true });
+			
 		}else{
 			//console.log("No session on");
-			//console.log(product);
+			console.log(product[0].exp_date);
 			res.render('ProductSearch', { products: product, session: false });
 		}
 		// callback(null, res);

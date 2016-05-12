@@ -72,7 +72,7 @@ $(window).load(function(){
 <div class="price">
                 <span class="value"><h4>$ <%= products.object[0].price %> <strong class="glyphicon glyphicon-remove" style="color: red"></strong> 
                 <h4 style="font-weight: bold;">New Price: $ <%= ((products.object[0].price)*0.2).toFixed(2) %></h4> 
-                <div>Expires : <%= new Date(products.object[0].exp_date).toLocaleDateString() %></div>
+                <h4>Expires : <%= new Date(products.object[0].exp_date).toLocaleDateString() %> </h4>
               </span>
 </div><br></div>
 

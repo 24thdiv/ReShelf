@@ -6,8 +6,6 @@ var connection = mongoose.createConnection("mongodb://admin:adminadmin@ds013172.
 autoIncrement.initialize(connection);
 
 var reviewSchema = mongoose.Schema({
-	c_id: {type:String, required: true},
-	username: {type: String, required: true},
 	rating: {type: Number, required: true},
 	username: {type:String, required: true},
 	review_title: {type: String, required: true},
@@ -17,24 +15,26 @@ var reviewSchema = mongoose.Schema({
 
 var productSchema = mongoose.Schema({
 	p_id: {type: Number, required: true, index: true},
-	f_id: {type: Number, required: true},
-	f_name: {type: String, required: true},
+	f_id: {type: Number, required: false},
+	f_name: {type: String, required: false},
+	email : {type : String, required : true},
 	cat_id: {
 		type: Number
-	},
+	},//Farmer Detail
 	name: {type: String, required: true},
 	price: {type: String, required: true},
 	weight: Number,
 	price_unit: String,
 	unit: {type: String, required: true},
-	product_img: String,
-	images: [{type: String}],
-	reviews: [reviewSchema],
+	product_img: {type : String, required : false},
+	images: [{type: String}],//Farmer Detail
+	reviews: [reviewSchema],//Farmer Detail
 	details: {type: String},
 	description: String,
 	features: {type: String, required: true},
 	isActive: {type: Boolean, default: true},
-	quantity: {type: Number, required: true}
+	quantity: {type: Number, required: true},
+	exp_date : {type : Date, required : true}
 },{
 	collection: 'products',
     timestamps: true,

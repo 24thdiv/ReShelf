@@ -71,6 +71,9 @@ exports.prod_search = function(msg, callback){
 		searchData.name = regexp;	
 	}
 	
+	/*var currentDate = new Date();
+	searchData.exp_date = {$gte : {currentDate}};*/
+
 	console.log(searchData);
 
 	Product.find(searchData, function(err, product){
