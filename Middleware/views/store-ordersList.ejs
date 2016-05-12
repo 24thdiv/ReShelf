@@ -110,26 +110,19 @@
                       <tr>
                         <th>Order Id</th>
                         <th>Order Date</th>
-                        <th>Customer Contact</th>
+                     
                         <th>Order Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat = "order in orders">
-                        <td ng-model = "o_id"><a href ng-click="showStoreOrderDetails(order);">{{order.o_id}}<a/></td>
+                        <td ng-model = "o_id" style="color:blue; text-decoration:underline;"><a href ng-click="showStoreOrderDetails(order);">{{order.o_id}}<a/></td>
                         <td>{{order.createdAt | date : 'MM-dd-yyyy' || 'Empty'}}</td>
-                        <td>{{order.contact || 'Empty'}}</td>
+                      
                         <td>{{order.status || 'Empty'}}</td>
                       </tr>
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Order Id</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                        <th>Pick-Up Time</th>
-                      </tr>
-                    </tfoot>
+	                
                   </table>
 
                   <button type="button" class="btn btn-primary" ng-show="isShowStoreOrderDetails" ng-click="changeIsShowStoreOrderDetails();">See All Orders</button>
@@ -140,23 +133,23 @@
                     <!-- {{orderDetails}} -->
                     <div ng-repeat="tempOrder in orderDetails.order_detail">
                       <div ng-show="tempOrder.f_id == f_id">
-                        <label>Product ID : </label>
+                        <label style="color:blue;">Product ID : </label>
                         <label>{{tempOrder.p_id}}</label>
 
-                        <label>Quantity : </label>
+                        <label style="color:blue;">Quantity : </label>
                         <label>{{tempOrder.qty}}</label>
 
-                        <label>Sub-Total : </label>
-                        <label>{{tempOrder.price}}</label>
+                        <label style="color:blue;">Sub-Total : </label>
+                        <label>{{(tempOrder.price)*0.2 }}</label>
                       </div>
                     </div>
 
                     
                     
 
-                    
-                    <label>Total</label>
-                    <label ng-model = "total">{{total}}<label>
+                    <hr>
+                    <label style="color:red;">Total</label>
+                    <label ng-model = "total">{{(total)*0.2}}<label>
                     
                   </div>
                 

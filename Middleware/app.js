@@ -219,7 +219,7 @@ app.get('/search', product.prod_search);
 app.get('/product', product.prod_details);
 app.post('/create_review',product.create_review);
 app.post('/f_create_review',product.f_create_review); 
-app.get('/farmer_page',product.farmer_page);
+app.get('/store_page',product.farmer_page);
 
 app.get('/frame', function(req,res){
   res.render('frame');

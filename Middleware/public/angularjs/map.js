@@ -79,7 +79,7 @@ $scope.getStores = function() {
 }
 
 $scope.initialise = function() {
-        var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+        var myLatlng = new google.maps.LatLng(37.3422,-121.8833);
         var mapOptions = {
             center: myLatlng,
             zoom: 13,
@@ -87,7 +87,7 @@ $scope.initialise = function() {
         };
         var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
       // Geo Location /
-        navigator.geolocation.getCurrentPosition(function(pos) {
+     /*   navigator.geolocation.getCurrentPosition(function(pos) {
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
             var myLocation = new google.maps.Marker({
@@ -97,7 +97,7 @@ $scope.initialise = function() {
                 icon:image,
                 title: "My Location"
             });
-        });
+        });*/
         
         $scope.dvMap = map;
         // Additional Markers //
@@ -114,7 +114,7 @@ $scope.initialise = function() {
 
             marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
             google.maps.event.addListener(marker, 'click', function(){
-                infoWindow.setContent('<a style="color:blue; text-decoration: underline;" href="/farmer_page?id='+info.f_id+'"><h4>' + marker.title + '</h4></a>' + marker.content);
+                infoWindow.setContent('<a style="color:blue; text-decoration: underline;" href="/store_page?id='+info.f_id+'"><h4>' + marker.title + '</h4></a>' + marker.content);
                 infoWindow.open($scope.dvMap, marker);
             });
             $scope.markers.push(marker);
@@ -128,7 +128,11 @@ $scope.initialise = function() {
 
 
 $scope.searchItemRedirect = function(){
-    window.location.assign("/search/?search="+$scope.q);
+	if(typeof $scope.q === "undefined") 
+   		window.location.assign("/search/?search=");
+	else
+		window.location.assign("/search/?search="+$scopr.q);
+
   }
 
 

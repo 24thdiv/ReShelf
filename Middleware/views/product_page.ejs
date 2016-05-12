@@ -61,7 +61,7 @@ $(window).load(function(){
       <div class="col-sm-9">
       <br>
       <h4 class="capitalize"><%= products.object[0].name %>, <%= products.object[0].weight %> <%= products.object[0].unit %></h4>
-      <h5 style="font-weight: bold;">Other products by | <a style="text-decoration: underline; color:green;" href="/farmer_page?id=<%= products.object[0].f_id %>"> <%= products.object[0].f_name %> </a></h5>
+      <h5 style="font-weight: bold;">Other products by | <a style="text-decoration: underline; color:green;" href="/store_page?id=<%= products.object[0].f_id %>"> <%= products.object[0].f_name %> </a></h5>
       <!--<div class="row">
       <% if(typeof avg_rating != 'undefined') {
             if(avg_rating != "") { %>
