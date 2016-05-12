@@ -26,7 +26,18 @@
 
 
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDuiDw7TZPGDoAhZO_ghj1ygRzp52V-mcw"></script>
-  </head>
+  
+<script src="js/typed.js"></script>
+<script>
+  $(function(){
+      $("#typing_text").typed({
+        strings: ["ReShelf: Search | Buy | Save "],
+        typeSpeed: 120
+      });
+  });
+</script>
+
+</head>
   <body ng-app="mapctr" ng-controller="mapctr" ng-init="getStores();">
   	   <% include menu.ejs %>
      <div style="height: 50px; display: block;"></div>
@@ -55,6 +66,40 @@
         </div>
 
         <br>
+
+
+
+
+
+	<div class="row">
+          <div class="col-lg-2">
+
+          </div>
+
+          <div class="col-lg-8">
+            
+           <p id="typing_text"></p>
+            <p style="color:Grey; font-size:16px; text-align:center;" >Food Products near your home at low cost.</p>
+
+          </div>
+
+          <div class="col-lg-2">
+            
+
+
+          </div>
+
+
+        </div>
+
+
+	<br>
+
+
+
+
+
+
         <div class="col-lg-7 ">
           <div class="panel panel-default">
             <div class="panel-heading" align="center"><b>Search Store</b></div>
@@ -87,7 +132,7 @@
                                     <tbody>
                                         <tr ng-repeat="store in mapTable">
                                             <td>{{$index + 1}}</td>
-                                            <td><a style="color:blue; text-decoration: underline;" href="/farmer_page?id={{store.f_id}}">{{store.fname}}</a></td>
+                                            <td><a style="color:blue; text-decoration: underline;" href="/store_page?id={{store.f_id}}">{{store.fname}}</a></td>
                                             <td>{{store.address}} ,{{store.zipcode}}</td>
                                         </tr>
                                     </tbody>
